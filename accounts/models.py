@@ -8,7 +8,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     full_name = models.CharField(max_length=30, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
@@ -21,7 +20,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 class Profile(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     id_user = models.IntegerField()
-    profile_img = models.ImageField(upload_to='profile_images', default='blank-profile')
+    contact = models.IntegerField()
+    state = models.CharField(default="", max_length=50)
+    city = models.CharField(default="", max_length=50)
+    profile_img = models.ImageField(upload_to='img/profile_images', default='blank-profile')
     location = models.CharField(max_length=100, blank=True)
 
 

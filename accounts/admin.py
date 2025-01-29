@@ -10,7 +10,7 @@ class CustomUserAdmin(admin.ModelAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = [
-        'user', 'profile_img',  'location'
+        'user', 'profile_img',  'location', 'state', 'city', 'contact'
     ]
 
 
