@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -10,21 +11,28 @@
     <title>Crop Details</title>
 
     <!-- CSS FILES -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="{% static 'https://fonts.googleapis.com '%}" />
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap"
+      rel="preconnect"
+      href="{% static 'https://fonts.gstatic.com '%}"
+      crossorigin
+    />
+
+    <link
+      href="{% static 'https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap '%}"
       rel="stylesheet"
     />
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../css/bootstrap-icons.css" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap.min.css '%}" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap-icons.css '%}" rel="stylesheet" />
 
-    <link rel="../stylesheet" href="css/slick.css" />
+    <link rel="stylesheet" href="{% static 'css/slick.css '%}" />
 
-    <link href="../css/tooplate-little-fashion.css" rel="stylesheet" />
+    <link
+      href="{% static 'css/tooplate-little-fashion.css '%}"
+      rel="stylesheet"
+    />
     <!--
 
 Tooplate 2127 Little Fashion
@@ -52,8 +60,8 @@ https://www.tooplate.com/view/2127-little-fashion
           <div class="row">
             <div class="col-lg-6 col-12">
               <div class="product-thumb">
-                <img
-                  src="../images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg"
+                <img style="width: 600px; height: 600px;"
+                  src="{{crop.crop_img.url}}"
                   class="img-fluid product-image"
                   alt=""
                 />
@@ -63,13 +71,13 @@ https://www.tooplate.com/view/2127-little-fashion
             <div class="col-lg-6 col-12">
               <div class="product-info d-flex">
                 <div>
-                  <h2 class="product-title mb-0">Beans</h2>
+                  <h2 class="product-title mb-0">{{crop.crop_name}}</h2>
 
-                  <p class="product-p">Original package design from house</p>
+                  
                 </div>
 
                 <small class="product-price text-muted ms-auto mt-auto mb-5"
-                  >$25</small
+                  >${{crop.crop_price}}</small
                 >
               </div>
 
@@ -77,12 +85,7 @@ https://www.tooplate.com/view/2127-little-fashion
                 <strong class="d-block mt-4 mb-2">Description</strong>
 
                 <p class="lead mb-5">
-                  Over three years in business, We’ve had the chance to work on
-                  a variety of projects, with companies Lorem ipsum dolor sit
-                  amet consectetur adipisicing elit. Consequuntur totam dolor
-                  sequi corporis atque. Ea ullam odit cumque saepe, omnis
-                  impedit modi nobis itaque mollitia velit rerum maiores,
-                  necessitatibus tenetur.
+                  {{crop.crop_desc}}
                 </p>
               </div>
 
@@ -167,12 +170,13 @@ https://www.tooplate.com/view/2127-little-fashion
       </footer>
 
       <!-- JAVASCRIPT FILES -->
-      <script src="../js/jquery.min.js"></script>
-      <script src="../js/bootstrap.bundle.min.js"></script>
-      <script src="../js/Headroom.js"></script>
-      <script src="../js/jQuery.headroom.js"></script>
-      <script src="../js/slick.min.js"></script>
-      <script src="../js/custom.js"></script>
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'js/Headroom.js' %}"></script>
+      <script src="{% static 'js/jQuery.headroom.js' %}"></script>
+      <script src="{% static 'js/slick.min.js' %}"></script>
+      <script src="{% static 'js/custom.js' %}"></script>
+      <script src="{% static 'js/custom.js' %}"></script>
     </main>
   </body>
 </html>

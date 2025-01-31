@@ -187,7 +187,7 @@ https://www.tooplate.com/view/2127-little-fashion
 
             <div class="col-lg-4 col-6 mb-3">
               <div class="product-thumb">
-                <a href="farmers-product-details.html">
+                <a href="{% url 'product-details' c.id %}">
                   <img style="width: 300px; height: 200px;"
                     src="{{c.crop_img.url}}"
                     class="img-fluid rounded mx-auto product-image"
@@ -198,14 +198,14 @@ https://www.tooplate.com/view/2127-little-fashion
                 <div class="product-top d-flex">
                   <span class="product-alert me-auto">New Arrival</span>
 
-                  <a href="#" class="bi-heart-fill product-icon"></a>
+                  <a href="{% url 'product-details' c.id %}" class="bi-heart-fill product-icon"></a>
                 </div>
 
                 <div class="product-info d-flex">
                   <div>
                     <h5 class="product-title mb-0">
                       <a
-                        href="farmers-product-details.html"
+                        href="{% url 'product-details' c.id %}"
                         class="product-title-link"
                         >{{c.crop_name}}</a
                       >

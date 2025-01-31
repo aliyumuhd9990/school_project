@@ -3,8 +3,18 @@ from django.http import HttpResponse
 from .models import *
 # Create your views here.
 
-def IndexViews(request):
+def IndexView(request):
     return render(request, 'products/index.html')
-def FarmerDashViews(request):
+def FarmerDashView(request):
     crop = Crop.objects.all()
     return render(request, 'farmers_page/farmer-dashboard.html', {'crop': crop})
+
+def FarmerProductView(request, id):
+    crop = Crop.objects.get(id=id)
+    return render(request, 'farmers_page/farmers-product.html', {'crop': crop})
+def ProductView(request):
+    # crop = Crop.objects.all()
+    return render(request, 'products/products.html')
+
+def AboutView(request):
+    return render(request, 'products/about.html')
