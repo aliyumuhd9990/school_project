@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'products',
+    'fontawesomefree',
+    # 'django_extensions',
+    # 'social_django',
+    # 'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
@@ -110,6 +114,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# AUTHENTICATION_BACKENDS = [
+#     'social_core.backends.facebook.FacebookOAuth2',
+#     'social_core.backends.twitter.TwitterOAuth',
+#     'social_core.backends.google.GoogleOAuth2',
+# ]
 
 
 # Internationalization

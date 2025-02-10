@@ -33,6 +33,9 @@
       href="{% static 'css/tooplate-little-fashion.css '%}"
       rel="stylesheet"
     />
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <!--
 
 Tooplate 2127 Little Fashion
@@ -51,31 +54,20 @@ https://www.tooplate.com/view/2127-little-fashion
 
     <main>
       <nav class="navbar navbar-expand-lg mb-5">
-        <div class="container">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+        <div class="container-fluid">
+          <a class="navbar-brand me-5"  href="#"><span style="color: #FF4400;" >KBT</span>-Marketplace</a>
+          <div class="d-flex d-lg-none">
+            <div class="d-flex me-4 mt-2">
+              <a href="{% url 'account' %}" class="col-lg-4 me-2">
+                <i class="fa-regular fa-user"></i>
+              </a>
+              
+          </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-
-          <a class="navbar-brand" href="index.html">
-            <strong><span>KBT</span>-Marketplace</strong>
-          </a>
-
-          <div class="d-lg-none">
-            <a
-              href="farmer-profile.html"
-              class="bi-person custom-icon me-3"
-            ></a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="navbarNav">
+        </div>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav mx-auto">
               <li class="nav-item">
                 <a class="nav-link active" href="#">View Crops</a>
@@ -98,20 +90,20 @@ https://www.tooplate.com/view/2127-little-fashion
                 <a class="nav-link" href="history.html">History</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'farmer-logout' %}">Logout</a>
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
               </li>
             </ul>
 
             <div class="d-none d-lg-block">
-              <a
-                href="farmer-profile.html"
-                class="bi-person custom-icon me-3"
-              ></a>
+              <a href="{% url 'account' %}" class="col-lg-4">
+                <i class="fa-regular fa-user"></i>
+              </a>
             </div>
           </div>
         </div>
       </nav>
 
+      {% include 'components/message.html' %}
       <div
         class="container col-lg-8 mx-auto col-12 section-padding shadow-sm mt-5 mb-5"
       >
@@ -145,7 +137,7 @@ https://www.tooplate.com/view/2127-little-fashion
             ><br /><i class="bi bi-archive"></i>
           </a>
           <a
-            href="order-page.html"
+            href="{% url 'add-crop' %}"
             class="btn btn-dark col-lg-4 col-4 mb-3 my-custom-btn text-light justify-content-center pt-3 px-5 mx-3 text-center position-relative"
           >
             Add Crops
@@ -187,9 +179,9 @@ https://www.tooplate.com/view/2127-little-fashion
 
             <div class="col-lg-4 col-6 mb-3">
               <div class="product-thumb">
-                <a href="{% url 'product-details' c.id %}">
+                <a href="#">
                   <img style="width: 300px; height: 200px;"
-                    src="{{c.crop_img.url}}"
+                    src="{% static 'images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg' %}"
                     class="img-fluid rounded mx-auto product-image"
                     alt="{{c.name}}"
                   />
@@ -198,7 +190,7 @@ https://www.tooplate.com/view/2127-little-fashion
                 <div class="product-top d-flex">
                   <span class="product-alert me-auto">New Arrival</span>
 
-                  <a href="{% url 'product-details' c.id %}" class="bi-heart-fill product-icon"></a>
+                  <a href="#" class="bi-heart-fill product-icon"></a>
                 </div>
 
                 <div class="product-info d-flex">

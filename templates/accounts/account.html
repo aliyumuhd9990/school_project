@@ -1,85 +1,162 @@
-
 <!DOCTYPE html>
 {% load static %}
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico'%}" />
-        <!-- Bootstrap icons-->
-        <link href="{% static 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css'%}" rel="stylesheet" type="text/css" />
-        <!-- Google fonts-->
-        <link href="{% static 'https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic'%}" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet" />
-        <link href="{% static 'css/all.min.css'%}" rel="stylesheet" />
-        <link href="{% static 'css/fontawesome.min.css'%}" rel="stylesheet" />
-        <title>Account_Page</title>
-    </head>
-    <body>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Favicon-->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'assets/favicon.ico'%}"
+    />
+    <!-- Bootstrap icons-->
+    <link
+      href="{% static 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Google fonts-->
+    <link
+      href="{% static 'https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet" />
+    <link href="{% static 'css/all.min.css'%}" rel="stylesheet" />
+    <link href="{% static 'css/tooplate-little-fashion.css'%}" rel="stylesheet" />
+    <link href="{% static 'css/fontawesome.min.css'%}" rel="stylesheet" />
+    <title>Account_Page</title>
+    <style>
+        .my-custom-btn:hover {
+            color: white;
+            background-color: #FF4400;
+          }
+          a.list-group-item:hover {
+            color: white;
+            background-color: #FF4400;
+          }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation-->
+    <nav class="bg-light">
+      <div class="container p-3">
+        <h3><span style="color: #FF4400;">My</span> Account</h3>
+      </div>
+    </nav>
+    {% include 'components/message.html' %}
 
-         <!-- Navigation-->
-         <nav class="navbar navbar-light bg-light static-top">
-            <div class="container">
-                <h3 class=" text-success">My Account</h3>  
-            </div>
-        </nav>
-
-
-        <div class="container-lg bg-light border  p-3 ">
-            <div class="container bg-success p-3" style="border-radius: 5px; box-shadow: 2px 2px 10px black;">
-                <div class="row mt-3">
-                <div class="col-4">
-                    
-                    <img class="rounded-circle" style="width: 100px; height: 100px;" src="{% static 'assets/img/hero_1.jpg' %}" alt="profile_img" />
-                </div>
-
-                <div class="col-8">
-                    <p class="text-light"><span style="font-size: 20px; font-weight: bolder;">Hi </span>{{ user.username }},</p>
-                    <a href="{% url 'profile' %}">
-                    <button class="btn btn-outline-light" style="width: 100%;">Edit Profile</button>
-                    </a>
-                </div>
-                </div>
-            </div>
-        <div class="container-sm mt-5 p-3 bg-success  px-5" style="border-radius: 5px; box-shadow: 2px 2px 10px black;"">
-           <h5 class="text-light text-decoration-underline">Account</h5>
-           <ul>
-            <li><a class="text-capitalize text-dark text-decoration-none" href="#">Order List</a></li>
-            <li><a class="text-capitalize text-dark text-decoration-none" href="#">Cart</a></li>
-            <li><a class="text-capitalize text-dark text-decoration-none" href="#">Watch List</a></li>
-           </ul>
-           <h5 class="text-light text-decoration-underline">Supports</h5>
-           <ul class="">
-            <li><a class="text-capitalize text-dark text-decoration-none" href="#">FAQ</a></li>
-            <li><a class="text-capitalize text-dark text-decoration-none" href="#">Privacy</a></li>
-            <li><a class="text-capitalize text-dark text-decoration-none" href="#">About Us</a></li>
-           </ul>
-           <h5 class="text-light text-decoration-underline">Settings</h5>
-           <ul>
-            <li><a class="text-capitalize text-dark text-decoration-none" href="#">Location</a></li>
-            <li><a class="text-capitalize text-dark text-decoration-none" href="#">Themes</a></li>
-        </ul>
-        <div class="d-grid btn-block">
-            <button  style="border-radius: 2px;" class="btn btn-outline-light" type="submit">LogOut</button>
-            <br>
+    <div
+      class="col-lg-6 border-2 shadow-sm mx-auto col-10 border border-light rounded-2 bg-body text-white text-center mt-5 p-5"
+      
+    >
+      <div class="row">
+        {% if profile.profile_img %}
+        <img
+          src="{{profile.profile_img.url}}"
+          style="width: 300px; height: 150px"
+          class="rounded mx-auto d-block"
+          alt="..."
+        />
+        {% else %}
+        <img
+          src="{% static 'img/profile_images/du.png' %}"
+          style="width: 300px; height: 150px;"
+          class="rounded mx-auto d-block"
+          alt="Default Image"
+        />
+        {% endif %}
+      </div>
+      <div class="row mt-3">
+        <p class="text-dark">{{user.full_name}}</p>
+        <div class="d-grid gap-2">
+          <a
+            href="{% url 'edit-profile' %}"
+            class="btn btn-dark my-custom-btn"
+            type="button"
+          >
+            Edit Profile
+          </a>
         </div>
-        </div>
-        </div>
+      </div>
+    </div>
+    <div class="container-sm mt-5 p-3 bg-body col-lg-6 px-5 shadow-sm rounded-2">
+      <h6 class="text-dark my-3">Profile Info</h6>
+      <ul class="list-group">
+        <li class="list-group-item"><b>Name:</b> {{user.full_name}}</li>
+        <li class="list-group-item">
+          <b>Email:</b> {{user.email}}
+        </li>
+        <li class="list-group-item"><b>Contact:</b> {{profile.contact}}</li>
+        <li class="list-group-item"><b>Role:</b> {{user.role}}</li>
+      </ul>
+      <h6 class="text-dark my-3">Address Details</h6>
+      <ul class="list-group">
+        <li class="list-group-item"><b>State:</b>{{address.state}}</li>
+        <li class="list-group-item">
+          <b>City:</b>{{address.city}}
+        </li>
+        <li class="list-group-item"><b>Street:</b> {{address.street}}</li>
+        <li class="list-group-item"><b>Location:</b> {{address.location}}</li>
+        <a href="{% url 'edit-address' %}" class="btn btn-white text-start text-decoration-underline border my-custom-btn mt-1">
+          Update Address
+        </a>
+      </ul>
 
-         <!-- Bootstrap core JS-->
-         <script src="{% static 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js'%}"></script>
-         <!-- Core theme JS-->
-         <script src="{% static 'js/scripts.js'%}"></script>
-         <script src="{% static 'js/bootstrap.min.js'%}"></script>
-         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-         <!-- * *                               SB Forms JS                               * *-->
-         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-         <script src="https://kit.fontawesome.com/e1ae1750b0.js" crossorigin="anonymous"></script>
-         <script src="{% static 'https://cdn.startbootstrap.com/sb-forms-latest.js'%}"></script>
-    </body>
+      <h6 class="text-dark my-3">Settings</h6>
+      <div class="d-grid gap-2">
+        <a href="#" class="btn btn-white text-start border my-custom-btn">
+          Privacy and Security
+        </a>
+        <a href="" class="btn btn-white text-start border my-custom-btn">
+          About
+        </a>
+        <a href="" class="btn btn-white text-start border my-custom-btn">
+          Theme
+        </a>
+      </div>
+      <h6 class="text-dark my-3">Support</h6>
+      <div class="d-grid gap-2">
+        <a href="#" class="btn btn-white text-start border my-custom-btn">
+          Ask a Question
+        </a>
+        <a href="" class="btn btn-white text-start border my-custom-btn">
+          FAQ
+        </a>
+        <a href="" class="btn btn-white text-start border my-custom-btn">
+          Privacy Policy
+        </a>
+        <a href="{% url 'logout' %}" class="btn btn-dark text-start border my-custom-btn">
+          Logout
+        </a>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JS-->
+    <script src="{% static 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js'%}"></script>
+    <!-- Core theme JS-->
+    <script src="{% static 'js/scripts.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script
+      src="https://kit.fontawesome.com/e1ae1750b0.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'https://cdn.startbootstrap.com/sb-forms-latest.js'%}"></script>
+    <script>
+      if(window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+      }
+    </script>
+  </body>
 </html>
