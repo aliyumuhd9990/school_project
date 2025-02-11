@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from .managers import CustomUserManager
+from django.urls import reverse
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):

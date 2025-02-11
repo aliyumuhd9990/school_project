@@ -3,6 +3,9 @@ from .models import CustomUser, Profile, Address
 from django.contrib.auth import authenticate
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+# from django.urls import reverse
+
+
 # from .authentications import authenticate
 # Create your views here.
 #pyhton manage.py migrate --run-syncdb

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block content %} 
+{% block title%} 
+{% if category %} 
+{{category.name}} 
+{% else %} 
+{{Products}} 
+{% endif %} 
+{% endblock %}
+<style>
+    ul {
+        list-style: none;
+    } 
+    ul li {
+        margin-left: 15px;
+    }
+    
+    ul li a:hover{
+        text-decoration: underline;
+    }
+
+    .slc:active{
+        color: #FF4400;
+    }
+</style>
+
+<section class="featured-product section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-12text-center">
+        <h1 class="mb-5">Categories</h1>
+      </div>
+
+      <ul class= "d-flex">
+        <li {% if not category %} class="slc" {% endif %}>
+          <a href="{% url 'product:products-list' %}">All</a>
+        </li>
+        
+        {% for c in categories %} 
+        <li {% if category.slug == c.slug %}class="slc"{% endif %}>
+        <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+        </li>
+
+        {% endfor %}
+      </ul>
+
+      <h2>{% if category %}{{category.name}}{% else %}Products{% endif %}</h2>
+      {% for c in crop %}
+      <div class="col-lg-4 col-12 mb-3">
+        <div class="product-thumb">
+          <a href="{{c.get_absolute_url}}">
+            <img
+              src="{% if c.crop_img %}{{c.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}"
+              class="img-fluid product-image"
+              style="width: 400px; height: 350px"
+              alt=""
+            />
+          </a>
+
+          <div class="product-top d-flex">
+            <span class="product-alert me-auto">New Arrival</span>
+
+            <a href="#" class="bi-heart-fill product-icon"></a>
+          </div>
+
+          <div class="product-info d-flex">
+            <div>
+              <h5 class="product-title mb-0">
+                <a href="{{ c.get_absolute_url}}" class="product-title-link"
+                  >{{c.crop_name}}</a
+                >
+              </h5>
+
+              <p class="product-p">{{c.crop_desc}}</p>
+            </div>
+
+            <small class="product-price text-muted ms-auto mt-auto mb-5"
+              >${{c.crop_price}}</small
+            >
+          </div>
+        </div>
+      </div>
+      {% endfor %} 
+    </div>
+  </div>
+</section>
+      {% endblock content %}

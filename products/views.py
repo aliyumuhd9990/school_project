@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-# from django.http import HttpResponse
+from django.http import HttpResponse
 from .models import *
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-
+app_name = 'products'
 
 def IndexView(request):
     crop = Crop.objects.all()
@@ -30,13 +30,34 @@ def AddProductView(request):
     
     # crop = Crop.objects.get(id=id)
     # return render(request, 'farmers_page/farmers-product.html', {'crop': crop})
-def ProductDetailView(request,id):
-    crop = get_object_or_404(Crop, id=id)
-    return render(request, 'products/products-details.html', {'crop' : crop})
+def ProductDetailView(request,id,slug):
+    crop = get_object_or_404(Crop, id=id, slug=slug, available=True)
+    crops = Crop.objects.filter(available = True)
+    
+    context = {
+        'crop' : crop,
+        'crops' : crops,
+    }
+    return render(request, 'products/products-details.html', context)
 
 def ProductView(request):
     crop = Crop.objects.all()
     return render(request, 'products/products.html', {'crop' : crop})
+
+def ProductListView(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
+    crop = Crop.objects.filter(available = True)
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        crop = crop.filter(category=category)
+
+    context = {
+        'crop': crop,
+        'category': category,
+        'categories': categories,
+    }
+    return render(request, 'products/list.html', context)
 
 def AboutView(request):
     return render(request, 'products/about.html')

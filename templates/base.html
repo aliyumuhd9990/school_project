@@ -74,10 +74,10 @@ https://www.tooplate.com/view/2127-little-fashion
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="{% url 'about' %}">About</a>
+          <a class="nav-link " aria-current="page" href="">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="#">Products</a>
+          <a class="nav-link " aria-current="page" href="{{slug.get_absolute_url}}">Products</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " aria-current="page" href="#">Contact</a>
@@ -99,7 +99,7 @@ https://www.tooplate.com/view/2127-little-fashion
       
       <form class="d-flex ms-3" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btn-outline-dark" type="submit">Search</button>
       </form>
     </div>
     

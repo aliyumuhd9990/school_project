@@ -72,7 +72,10 @@
             <div class="col-lg-4 col-12 mb-3">
                 <div class="product-thumb">
                     <a href="#">
-                        <img src="{% static 'images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg' %}" class="img-fluid product-image" alt="">
+                        <img src="{% if c.crop_img %}{{c.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}"
+                        class="img-fluid product-image"
+                        style="width: 400px; height: 350px"
+                        alt="">
                     </a>
                     
                     <div class="product-top d-flex">
@@ -84,7 +87,7 @@
                     <div class="product-info d-flex">
                         <div>
                             <h5 class="product-title mb-0">
-                                <a href="{% url 'product-detail' c.id %}" class="product-title-link">{{c.crop_name}}</a>
+                                <a href="{{c.get_absolute_url}}" class="product-title-link">{{c.crop_name}}</a>
                             </h5>
                             
                             <p class="product-p">{{c.crop_desc}}</p>
@@ -140,7 +143,7 @@
                                                 </p>
                                                 
                                                 <div class="mt-2 mt-lg-auto">
-                                                    <a href="{% url 'about' %}" class="custom-link mb-2">
+                                                    <a href="" class="custom-link mb-2">
                                                         Learn more about us
                                                         <i class="bi-arrow-right ms-2"></i>
                                                     </a>
@@ -268,38 +271,37 @@
                             <h2 class="mb-5">Featured Products</h2>
                         </div>
                         {% for c in crop %}
-                        
-                        <div class="col-lg-4 col-12 mb-3">
-                            <div class="product-thumb">
-                                <a href="product-detail.html">
-                                    <img src="{% static 'images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg' %}" class="img-fluid product-image" alt="">
-                                </a>
-                                
-                                <div class="product-top d-flex">
-                                    <span class="product-alert me-auto">New Arrival</span>
-                                    
-                                    <a href="#" class="bi-heart-fill product-icon"></a>
-                                </div>
-                                
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="product-detail.html" class="product-title-link">{{c.crop_name}}</a>
-                                        </h5>
-                                        
-                                        <p class="product-p">{{c.crop_desc}}</p>
-                                    </div>
-                                    
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">${{c.crop_price}}</small>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
+<div class="col-lg-4 col-12 mb-3">
+    <div class="product-thumb">
+        <a href="{{c.get_absolute_url}}">
+            <img src="{% if c.crop_img %}{{c.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}" class="img-fluid product-image" style="width: 400px; height: 350px;" alt="">
+        </a>
+        
+        <div class="product-top d-flex">
+            <span class="product-alert me-auto">New Arrival</span>
+            
+            <a href="#" class="bi-heart-fill product-icon"></a>
+        </div>
+        
+        <div class="product-info d-flex">
+            <div>
+                <h5 class="product-title mb-0">
+                    <a href="{{ c.get_absolute_url}}" class="product-title-link">{{c.crop_name}}</a>
+                </h5>
+                
+                <p class="product-p">{{c.crop_desc}}</p>
+            </div>
+            
+            <small class="product-price text-muted ms-auto mt-auto mb-5">${{c.crop_price}}</small>
+        </div>
+    </div>
+</div>
+{% endfor %}
                         
                        
 {% endif %}
                         <div class="col-12 text-center">
-                            <a href="{% url 'products' %}" class="view-all">View All Products</a>
+                            <a href="" class="view-all">View All Products</a>
                         </div>
                         
                     </div>
