@@ -3,7 +3,7 @@ from .models import CustomUser, Profile, Address
 from django.contrib.auth import authenticate
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
-# from django.urls import reverse
+from django.urls import reverse
 
 
 # from .authentications import authenticate
@@ -49,7 +49,7 @@ def FarmerLoginViews(request):
         user = authenticate(email=email, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('farmer-dash')
+            return redirect(reverse('products:farmer_dash'))
         else:
             messages.error(request, 'Invalid Creadentials!!')
             return redirect('farmer-login')
@@ -64,9 +64,9 @@ def LoginViews(request):
         user = authenticate(email=email, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('index')
+            return redirect(reverse('products:index'))
         else:
-            messages.error(request, 'Invalid Creadentials!!')
+            messages.error(request, 'Invalid Credentials!!')
             return redirect('login')
     else:
         return render(request, 'accounts/sign-in.html')

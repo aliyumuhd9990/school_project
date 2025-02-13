@@ -11,28 +11,24 @@
     <title>Farmer-Profile</title>
 
     <!-- CSS FILES -->
-    <link rel="preconnect" href="{% static 'https://fonts.googleapis.com '%}" />
+    <link rel="preconnect" href="{% static 'https://fonts.googleapis.com' %}" />
+
+    <link rel="preconnect" href="{% static 'https://fonts.gstatic.com' %}" crossorigin />
 
     <link
-      rel="preconnect"
-      href="{% static 'https://fonts.gstatic.com '%}"
-      crossorigin
-    />
-
-    <link
-      href="{% static 'https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap '%}"
+      href="{% static 'https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap' %}"
       rel="stylesheet"
     />
 
-    <link href="{% static 'css/bootstrap.min.css '%}" rel="stylesheet" />
-    <link href="{% static 'css/bootstrap-icons.css '%}" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap-icons.css' %}" rel="stylesheet" />
 
-    <link rel="stylesheet" href="{% static 'css/slick.css '%}" />
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}" />
 
-    <link
-      href="{% static 'css/tooplate-little-fashion.css '%}"
-      rel="stylesheet"
-    />
+    <link href="{% static 'css/tooplate-little-fashion.css' %}" rel="stylesheet" />
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <!--
 
 Tooplate 2127 Little Fashion
@@ -50,11 +46,24 @@ https://www.tooplate.com/view/2127-little-fashion
     </section>
 
     <main>
+      <header
+      class="site-header mt-0 section-padding d-flex justify-content-center align-items-center"
+      >
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-12">
+              <h1>
+                <h1 class="hero-title text-center mb-5">Add Crop</h1>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </header>
       <section class="sign-in-form section-padding">
         <div class="container">
           <div class="row">
             <div class="col-lg-8 mx-auto col-12">
-              <h1 class="hero-title text-center mb-5">Add Crop</h1>
+        
 
               <div class="row">
                 <div class="col-lg-8 col-11 mx-auto">
@@ -75,7 +84,7 @@ https://www.tooplate.com/view/2127-little-fashion
                       <br />
                     <div class="form-floating">
                       <input
-                        type="text"
+                        type="tel"
                         name="cprice"
                         id="title"
                         class="form-control"
@@ -100,8 +109,10 @@ https://www.tooplate.com/view/2127-little-fashion
                     </div>
                     <br />
                    
-                    
-                    <div class="form-floating">
+                    <label class="form-label" for="file"
+                          ><b>Crop Image:</b></label
+                        >
+                    <div class="">
                       <input
                         type="file"
                         name="cimg"
@@ -111,10 +122,27 @@ https://www.tooplate.com/view/2127-little-fashion
                         required
                       />
 
-                      <label for="file">Crop Image</label>
                     </div>
                     <br />
 
+                    <label class="form-label" for="role"
+                          ><b>Category:</b></label
+                        >
+                        <select
+                          name="cat"
+                          id="cat"
+                          class="form-control"
+                          required
+                        >
+                      <option value="food">Food Crops</option>
+                      <option value="fiber">Fiber Crops</option>
+                      <option value="oil">Oil Crops</option>
+                      <option value=""></option>
+                      <option value=""></option>
+                      <option value=""></option>
+                    </select><br>
+                    <label for="available">Available</label>
+                    <input type="checkbox" name="available" id="available" checked>
                    
 
                     <button

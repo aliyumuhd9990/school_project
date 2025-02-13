@@ -50,17 +50,20 @@ https://www.tooplate.com/view/2127-little-fashion
     </section>
 
     <main>
-      
       <header
-        class="site-header mt-0 section-padding d-flex justify-content-center align-items-center"
+      class="site-header mt-0 section-padding d-flex justify-content-center align-items-center"
       >
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-10 col-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-12">
+            {% if request.user.role == 'farmer' %}
+            <h1>Crop Details</h1>
+            {% else %}
               <h1>
                 <span class="d-block text-primary">We provide you</span>
-                <span class="d-block text-dark">Fashionable Stuffs</span>
+                <span class="d-block text-dark">with Good Crops</span>
               </h1>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -83,10 +86,15 @@ https://www.tooplate.com/view/2127-little-fashion
               <div class="product-info d-flex">
                 <div>
                   <h2 class="product-title mb-0">{{crop.crop_name}}</h2>
+                  {% if request.user == farmer %}
                   <h3>
-                    <a href="{{crop.category.get_absolute_url }}">{{crop.category}}</a>
+                    <a href="">{{crop.category}}</a>
                   </h3>
-
+                  {% else %}
+                  <h3>
+                    <a href="{{crop.get_absolute_url }}">{{crop.category}}</a>
+                  </h3>
+                  {% endif %}
                 </div>
 
                 <small class="product-price text-muted ms-auto mt-auto mb-5"
@@ -102,7 +110,25 @@ https://www.tooplate.com/view/2127-little-fashion
                 </p>
                 {{crop.crop_desc|linebreaks}}
               </div>
+              {% if request.user.role == 'farmer' %}
+              <div class="product-cart-thumb row">
+                <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                  <a href="{% url 'products:edit-crop' crop.id%}" class="btn custom-btn cart-btn">
+                    Edit Crop
+                  </a>
+                </div>
+                <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                  <a href="" class="btn custom-btn cart-btn"> Remove Crop </a>
+                </div>
 
+                <p>
+                  <a href="#" class="product-additional-link">Orders</a>
+
+                  <a href="#" class="product-additional-link">History</a>
+                </p>
+              </div>
+
+              {% else %}
               <div class="product-cart-thumb row">
                 <div class="col-lg-6 col-12">
                   <select
@@ -128,20 +154,21 @@ https://www.tooplate.com/view/2127-little-fashion
                     Add to Cart
                   </button>
                 </div>
-
                 <p>
                   <a href="#" class="product-additional-link">Details</a>
-
+                  
                   <a href="#" class="product-additional-link"
-                    >Delivery and Payment</a
+                  >Delivery and Payment</a
                   >
                 </p>
               </div>
+              {% endif %}
             </div>
           </div>
         </div>
       </section>
-
+      {% if request.user.role == 'farmer' %}
+      {% else %}
       <section class="related-product section-padding border-top">
         <div class="container">
           <div class="row">
@@ -176,7 +203,7 @@ https://www.tooplate.com/view/2127-little-fashion
     </div>
 </div>
 {% endfor %}
-
+{% endif %}
             </div>
           </div>
         </div>

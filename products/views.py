@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import *
 from django.contrib.auth.decorators import login_required
+from django.utils.text import slugify
 # Create your views here.
 app_name = 'products'
 
@@ -10,21 +11,42 @@ def IndexView(request):
     return render(request, 'products/index.html', {'crop': crop})
 
 def FarmerDashView(request):
+    category = None
+    categories = Category.objects.all()
     crop = Crop.objects.filter(farmer=request.user)
-    return render(request, 'farmers_page/farmer-dashboard.html', {'crop': crop})
+    context = {
+        'crop': crop,
+        'category': category,
+        'categories': categories,
+    }
+    return render(request, 'farmers_page/farmer-dashboard.html', context)
 
 @login_required
 def AddProductView(request):
     if request.method == 'POST':
-        cname = request.POST['cname']
-        cdesc = request.POST['cdesc']
-        cprice = request.POST['cprice']
-        cimg = request.POST['cimg']
+        cname = request.POST.get('cname')
+        cdesc = request.POST.get('cdesc')
+        cprice = request.POST.get('cprice')
+        cimg = request.POST.get('cimg')
+        cat = request.POST.get('cat')
+        is_available = request.POST['available']
+        # slug = request.POST.get('slug')
 
-        crop = Crop.objects.create(farmer=request.user, crop_name=cname, crop_desc=cdesc, crop_price=cprice, crop_img=cimg)
+        is_available = True if is_available == 'on' else False
+        category, created = Category.objects.get_or_create(name = cat)
+        slug = slugify(cname)
+
+        counter = 1
+        original_slug = slug
+        while Crop.objects.filter(slug=slug).exists():
+            slug = f"{original_slug}-{counter}"
+            counter += 1
+
+        crop = Crop.objects.create(farmer=request.user, crop_name=cname, crop_desc=cdesc, crop_price=cprice, crop_img=cimg, category=category, available=is_available, slug=slug)
         crop.farmer = request.user
+        crop.crop_name
         crop.save()
-        return redirect('farmer-dash')
+        return redirect(reverse('products:farmer_dash'))
     else:
         return render(request, 'farmers_page/add-crops.html')
     
@@ -61,3 +83,8 @@ def ProductListView(request, category_slug=None):
 
 def AboutView(request):
     return render(request, 'products/about.html')
+
+@login_required
+def EditProductView(request, id):
+    crop = Crop.objects.get(id=id)
+    return render(request, 'farmers_page/edit-crops.html', {'crop': crop})

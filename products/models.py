@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from accounts.models import CustomUser
+from django.utils.text import slugify
 
 # Create your models here.
 class Category(models.Model):
@@ -39,5 +40,16 @@ class Crop(models.Model):
     
     def get_absolute_url(self):
         return reverse('product:product-detail', args=[self.id, self.slug])
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.crop_name)
+            counter = 1
+            original_slug = self.slug
+            
+            while Crop.objects.filter(slug=self.slug).exists():
+                self.slug = f"{original_slug}-{counter}"
+                counter += 1
+        super().save(*args, **kwargs)
+
     
 
