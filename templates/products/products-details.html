@@ -176,7 +176,7 @@ https://www.tooplate.com/view/2127-little-fashion
               <h3 class="mb-5">You might also like</h3>
             </div>
 
-            {% for c in crops %}
+            {% for c in recommend_crop %}
 <div class="col-lg-4 col-12 mb-3">
     <div class="product-thumb">
         <a href="{{c.get_absolute_url}}">
@@ -293,16 +293,17 @@ https://www.tooplate.com/view/2127-little-fashion
             <div class="row">
               <div class="col-lg-6 col-12 mt-4 mt-lg-0">
                 <img
-                  src="images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg"
+                  src="{% if crop.crop_img %}{{crop.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}"
                   class="img-fluid product-image"
                   alt=""
+                  style="width: 350px; height: 300px"
                 />
               </div>
 
               <div class="col-lg-6 col-12 mt-3 mt-lg-0">
-                <h3 class="modal-title" id="exampleModalLabel">Tree pot</h3>
+                <h3 class="modal-title" id="exampleModalLabel">{{crop.crop_name}}</h3>
 
-                <p class="product-price text-muted mt-3">$25</p>
+                <p class="product-price text-muted mt-3">${{crop.crop_price}}</p>
 
                 <p class="product-p">Quatity: <span class="ms-1">4</span></p>
 

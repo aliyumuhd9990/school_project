@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
+from django.contrib import messages
 # Create your views here.
 app_name = 'products'
 
@@ -27,7 +28,7 @@ def AddProductView(request):
         cname = request.POST.get('cname')
         cdesc = request.POST.get('cdesc')
         cprice = request.POST.get('cprice')
-        cimg = request.POST.get('cimg')
+        cimg = request.FILES.get('cimg')
         cat = request.POST.get('cat')
         is_available = request.POST['available']
         # slug = request.POST.get('slug')
@@ -43,9 +44,11 @@ def AddProductView(request):
             counter += 1
 
         crop = Crop.objects.create(farmer=request.user, crop_name=cname, crop_desc=cdesc, crop_price=cprice, crop_img=cimg, category=category, available=is_available, slug=slug)
+    
         crop.farmer = request.user
         crop.crop_name
         crop.save()
+        messages.success(request, 'Crops Added Successfully!!')
         return redirect(reverse('products:farmer_dash'))
     else:
         return render(request, 'farmers_page/add-crops.html')
@@ -55,10 +58,12 @@ def AddProductView(request):
 def ProductDetailView(request,id,slug):
     crop = get_object_or_404(Crop, id=id, slug=slug, available=True)
     crops = Crop.objects.filter(available = True)
+    recommend_crop = Crop.objects.filter(category=crop.category).exclude(id=crop.id)[:4]
     
     context = {
         'crop' : crop,
         'crops' : crops,
+        'recommend_crop' : recommend_crop,
     }
     return render(request, 'products/products-details.html', context)
 
