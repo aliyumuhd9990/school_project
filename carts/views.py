@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Cart, Order
+from .models import *
 from products.models import *
 # from django.views.decorators.http import require_POST
 # from .cart import Cart
