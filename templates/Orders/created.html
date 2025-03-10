@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Farmer-Profile</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="{% static 'https://fonts.googleapis.com '%}" />
+
+    <link
+      rel="preconnect"
+      href="{% static 'https://fonts.gstatic.com '%}"
+      crossorigin
+    />
+
+    <link
+      href="{% static 'https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap '%}"
+      rel="stylesheet"
+    />
+
+    <link href="{% static 'css/bootstrap.min.css '%}" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap-icons.css '%}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'css/slick.css '%}" />
+
+    <link
+      href="{% static 'css/tooplate-little-fashion.css '%}"
+      rel="stylesheet"
+    />
+    <!--
+
+Tooplate 2127 Little Fashion
+
+https://www.tooplate.com/view/2127-little-fashion
+
+-->
+  </head>
+
+  <body>
+    <section class="preloader">
+      <div class="spinner">
+        <span class="sk-inner-circle"></span>
+      </div>
+    </section>
+
+    <main>
+      <header
+        class="site-header mt-0 section-padding d-flex justify-content-center align-items-center"
+      >
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-12">
+              <h1>
+                <span class="d-block text-dark">Thank you</span>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </header>
+      <p>Your order has veen succefully completed. Your order number is <strong>{{ order.id }}</strong></p>
+
+      <!-- JAVASCRIPT FILES -->
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'js/Headroom.js' %}"></script>
+      <script src="{% static 'js/jQuery.headroom.js' %}"></script>
+      <script src="{% static 'js/slick.min.js' %}"></script>
+      <script src="{% static 'js/custom.js' %}"></script>
+      <script src="{% static 'js/custom.js' %}"></script>
+    </main>
+  </body>
+</html>

@@ -56,23 +56,121 @@ https://www.tooplate.com/view/2127-little-fashion
         <div class="container">
           <div class="row">
             <div class="col-lg-10 col-12">
-              {% if request.user.role == 'farmer' %}
-              <h1>Crop Details</h1>
-              {% else %}
               <h1>
                 <span class="d-block text-dark">My Carts</span>
               </h1>
-              {% endif %}
             </div>
           </div>
         </div>
       </header>
+      {% include 'components/message.html' %}
+      <div class="container">
 
-
-
-
-
+        {% if cart_items %}
+        {% for item in cart_items  %}
+        <div class="col-lg-6 col-12 my-5 d-block shadow mx-auto">
+          <div class="row d-flex">
+            <div class="col-6 mx-auto">
+              <img class="img rounded-5 " style="width: 100px; height: 100px;" src="{{item.crop.crop_img.url}}" alt="" />
+              <h3>{{item.crop.crop_name}}</h3>
+            </div>
+            <div class="col-6">
+              <p>Quantity: {{ item.quantity }}</p>
+              <p>Crop Price: ${{ item.crop.crop_price }}</p>
+              <p>Total Price: ${{ item.total_price }}</p>
+            </div>
+            <div class="d-grid gap-2 ">
+              <a href="{% url 'remove_from_cart' item.id %}" class="btn custom-btn cart-btn my-2">Remove Crop</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <h1>Total: ${{ total_price }}</h1>
+        <a class="btn custom-btn cart-btn" href="{% url 'orders:create_order' %}">Checkout</a>
+        {% else %}
+        <p class="text-center text-dark m-5">Your Carts is Empty!!</p>
+        {% endif %}
+        
+      </div>
       
+      {% comment %}
+        
+      
+      <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+        <button
+        type="submit"
+        class="btn custom-btn cart-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#cart-modal"
+        >
+        Add to Cart
+      </button>
+    </div>
+
+    <!-- CART MODAL -->
+    <div
+      class="modal fade"
+      id="cart-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0">
+          <div class="modal-header flex-column">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                <img
+                  src="{% if crop.crop_img %}{{crop.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}"
+                  class="img-fluid product-image"
+                  alt=""
+                  style="width: 350px; height: 300px"
+                  />
+                </div>
+
+              <div class="col-lg-6 col-12 mt-3 mt-lg-0">
+                <h3 class="modal-title" id="exampleModalLabel">{{crop.crop_name}}</h3>
+
+                <p class="product-price text-muted mt-3">${{crop.crop_price}}</p>
+                
+                <p class="product-p">Quatity: <span class="ms-1"></span></p>
+
+                <p class="product-p">Colour: <span class="ms-1">Black</span></p>
+
+                <p class="product-p pb-3">
+                  Size: <span class="ms-1">S/S</span>
+                </p>
+
+                <div class="border-top mt-4 pt-3">
+                  <p class="product-p">
+                    <strong>Total: <span class="ms-1">$100</span></strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <div class="row w-50">
+              <button type="button" class="btn custom-btn cart-btn ms-lg-4">
+                Checkout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {% endcomment %}
       <footer class="site-footer">
         <div class="container">
           <div class="row">

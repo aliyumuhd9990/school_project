@@ -16,7 +16,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     def get_absolute_url(self):
-        return reverse('product:products-list-by-category', args=[self.slug])
+        return reverse('products:products-list-by-category', args=[self.slug])
     
 
 class Crop(models.Model):
@@ -39,7 +39,8 @@ class Crop(models.Model):
         return self.crop_name
     
     def get_absolute_url(self):
-        return reverse('product:product-detail', args=[self.id, self.slug])
+        return reverse('products:products-detail', args=[self.id, self.slug])
+        # return reverse('product-detail', kwargs={'category_name': self.category})
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.crop_name)

@@ -74,10 +74,10 @@ https://www.tooplate.com/view/2127-little-fashion
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="">About</a>
+          <a class="nav-link " aria-current="page" href="{% url 'products:about' %}">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="{{slug.get_absolute_url}}">Products</a>
+          <a class="nav-link " aria-current="page" href="{% url 'products:products-list' %}">Products</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " aria-current="page" href="#">Contact</a>
@@ -87,11 +87,12 @@ https://www.tooplate.com/view/2127-little-fashion
         <a href="{% url 'account' %}" class="col-lg-4">
           <i class="fa-regular fa-user"></i>
         </a>
-        <a href="{% url 'cart_view'%}" class="col-lg-4 position-relative">
+        <a href="{% url 'cart_view' %}" class="col-lg-4 position-relative">
           <i class="fa-solid fa-cart-shopping">
 
+            
             <span class="position-absolute top-0 start-100 translate-middle ms-2 mb-3 badge rounded-circle text-light bg-danger">
-              5
+              0
             </span>
           </i>
         </a>
@@ -117,9 +118,9 @@ https://www.tooplate.com/view/2127-little-fashion
 
                 <div class="col-lg-3 col-10 me-auto mb-4">
                     <h4 class="text-white mb-3"><a href="index.html">KBT</a> Marketplace</h4>
-                    <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>KBT-Marketplace</strong></p>
+                    <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2025 <strong>KBT-Marketplace</strong></p>
                     <br>
-                    <p class="copyright-text">Designed by <a href="#" target="_blank">RandoDev</a></p>
+                    <p class="copyright-text">Designed by <a href="#" target="_blank">Aliyu Muhammad Musa</a></p>
                 </div>
 
                 <div class="col-lg-5 col-8">

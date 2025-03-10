@@ -20,25 +20,39 @@
         text-decoration: underline;
     }
 
-    .slc:active{
+    .slc{
         color: #FF4400;
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: underline;
+        background-color: 3px 3px #FF4400;
     }
 </style>
-
 <section class="featured-product section-padding">
+  <header
+        class="site-header mt-0 section-padding d-flex justify-content-center align-items-center"
+        >
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-12">
+                <h1>
+                  <h1 class="hero-title text-center mb-5">Categories</h1>
+                </h1>
+              </div>
+            </div>
+          </div>
+        </header>
   <div class="container">
     <div class="row">
-      <div class="col-12text-center">
-        <h1 class="mb-5">Categories</h1>
-      </div>
-
+     
       <ul class= "d-flex">
-        <li {% if not category %} class="slc" {% endif %}>
-          <a href="{% url 'product:products-list' %}">All</a>
+        <li class="{% if not category %}slc{% endif %}" >
+          <a href="{% url 'products:products-list' %}">All</a>
         </li>
         
         {% for c in categories %} 
-        <li {% if category.slug == c.slug %}class="slc"{% endif %}>
+        <li class=" {% if category.slug == c.slug %}slc{% endif %}"
+        >
         <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
         </li>
 

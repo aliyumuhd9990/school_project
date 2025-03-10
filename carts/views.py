@@ -2,38 +2,48 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from products.models import *
 # from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 # from .cart import Cart
 
 # Create your views here.
 # @require_POST
-def CartAddView(request, crop_id):
-    if not request.user.is_authenticated:
-        return redirect('login')
-    
+@login_required
+def CartAddView(request, crop_id):  
     crop = get_object_or_404(Crop, id=crop_id)
-    cart_item, Created = Cart.objects.get_or_create(user=request.user, crop=crop)
-    
-    if not Created:
-        cart_item.quantity += 1
-        cart_item.save()
-    return redirect('cart_view')
+    cart, created = Cart.objects.get_or_create(user=request.user)
 
+    if request.method == 'POST':
+        quantity = request.POST.get('quantity')
+    # Check if item is already in cart
+        cart_item, created = CartItem.objects.get_or_create(cart=cart, crop=crop, quantity=quantity)
+
+        if not created:
+            cart_item.quantity += int(quantity)  # Increment quantity if item exists
+            cart_item.save()
+
+        messages.success(request, 'Cart Successfully Updated!!')
+        return redirect('cart_view')  # Redirect to cart view after adding
+
+@login_required
 def CartView(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-    
-    cart_items = Cart.objects.filter(user=request.user)
-    total_price = sum(item.total_price() for item in cart_items)
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    cart_items = CartItem.objects.filter(cart=cart)
 
+    total_price = sum(item.total_price() for item in cart_items)
     context = {
-        'cart_items': cart_items,
-        'total_price': total_price,
-    }
+        'cart_items': cart_items, 
+        'total_price': total_price
+        }
+
     return render(request, 'Orders/cart.html', context)
 
+@login_required
 def RemoveFromCart(request, cart_id):
-    cart_item = get_object_or_404(Cart, user=request.user, id=cart_id)
-    cart_item.delete()
+    cart_items = get_object_or_404(CartItem, id=cart_id)
+    cart_items.delete()
+
+    messages.success(request, 'Item Removed Successfully!!')
     return redirect('cart_view')
 
 def UpdateCart(request, cart_id):

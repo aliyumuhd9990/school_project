@@ -12,13 +12,9 @@ def IndexView(request):
     return render(request, 'products/index.html', {'crop': crop})
 
 def FarmerDashView(request):
-    category = None
-    categories = Category.objects.all()
     crop = Crop.objects.filter(farmer=request.user)
     context = {
         'crop': crop,
-        'category': category,
-        'categories': categories,
     }
     return render(request, 'farmers_page/farmer-dashboard.html', context)
 

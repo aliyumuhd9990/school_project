@@ -68,7 +68,7 @@ https://www.tooplate.com/view/2127-little-fashion
           </div>
         </div>
       </header>
-
+      {% include 'components/message.html' %}
       <section class="product-detail section-padding">
         <div class="container">
           <div class="row">
@@ -86,13 +86,13 @@ https://www.tooplate.com/view/2127-little-fashion
               <div class="product-info d-flex">
                 <div>
                   <h2 class="product-title mb-0">{{crop.crop_name}}</h2>
-                  {% if request.user == farmer %}
+                  {% if request.user.role == 'farmer' %}
                   <h3>
                     <a href="">{{crop.category}}</a>
                   </h3>
                   {% else %}
                   <h3>
-                    <a href="{{crop.get_absolute_url }}">{{crop.category}}</a>
+                    <a href="{{ crop.category.get_absolute_url }}">{{crop.category}}</a>
                   </h3>
                   {% endif %}
                 </div>
@@ -129,35 +129,41 @@ https://www.tooplate.com/view/2127-little-fashion
               </div>
 
               {% else %}
+              <form action="{% url 'add_to_cart' crop.id %}" method="POST">
+                {% csrf_token %}
               <div class="product-cart-thumb row">
-                <div class="col-lg-6 col-12">
-                  <select
+                  <label for="quantity"><b>Quantity:</b></label><br>
+                  <div class="col-lg-6 col-12">
+                    <select
                     class="form-select cart-form-select"
-                    id="inputGroupSelect01"
-                  >
-                    <option selected>Quantity</option>
-                    <option value="1">1</option>
+                    id="quantity"
+                    name="quantity"
+                    >
+                    <option selected value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
                   </select>
                 </div>
-
+                
                 <div class="col-lg-6 col-12 mt-4 mt-lg-0">
-                  <a href="{% url 'add_to_cart' crop.id %}"
-                    type="submit"
-                    class="btn custom-btn cart-btn"
-                    data-bs-toggle="modal"
-                    data-bs-target="#cart-modal"
+                  <button
+                  type="submit"
+                  class="btn custom-btn cart-btn"
                   >
-                    Add to Cart
-                  </a>
-                </div>
-                <p>
-                  <a href="#" class="product-additional-link">Details</a>
-                  
-                  <a href="#" class="product-additional-link"
+                  Add to Cart
+                </button>
+              </div>
+            </form>
+              <p>
+                <a href="#" class="product-additional-link">Details</a>
+                
+                <a href="#" class="product-additional-link"
                   >Delivery and Payment</a
                   >
                 </p>
@@ -270,69 +276,7 @@ https://www.tooplate.com/view/2127-little-fashion
       </div>
     </footer>
 
-    <!-- CART MODAL -->
-    <div
-      class="modal fade"
-      id="cart-modal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content border-0">
-          <div class="modal-header flex-column">
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-lg-6 col-12 mt-4 mt-lg-0">
-                <img
-                  src="{% if crop.crop_img %}{{crop.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}"
-                  class="img-fluid product-image"
-                  alt=""
-                  style="width: 350px; height: 300px"
-                />
-              </div>
-
-              <div class="col-lg-6 col-12 mt-3 mt-lg-0">
-                <h3 class="modal-title" id="exampleModalLabel">{{crop.crop_name}}</h3>
-
-                <p class="product-price text-muted mt-3">${{crop.crop_price}}</p>
-
-                <p class="product-p">Quatity: <span class="ms-1">4</span></p>
-
-                <p class="product-p">Colour: <span class="ms-1">Black</span></p>
-
-                <p class="product-p pb-3">
-                  Size: <span class="ms-1">S/S</span>
-                </p>
-
-                <div class="border-top mt-4 pt-3">
-                  <p class="product-p">
-                    <strong>Total: <span class="ms-1">$100</span></strong>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-footer">
-            <div class="row w-50">
-              <button type="button" class="btn custom-btn cart-btn ms-lg-4">
-                Checkout
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    
     <!-- JAVASCRIPT FILES -->
     <script src="{% static 'js/jquery.min.js' %}"></script>
       <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

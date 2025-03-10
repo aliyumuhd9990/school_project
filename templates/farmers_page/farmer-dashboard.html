@@ -70,11 +70,14 @@ https://www.tooplate.com/view/2127-little-fashion
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav mx-auto">
               <li class="nav-item">
-                <a class="nav-link active" href="#">View Crops</a>
+                <a class="nav-link active" href="#">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">View Crops</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="add-crops.html">Add Crops</a>
+                <a class="nav-link" href="{% url 'products:add-crop' %}">Add Crops</a>
               </li>
 
               <li class="nav-item position-relative">
@@ -88,9 +91,6 @@ https://www.tooplate.com/view/2127-little-fashion
 
               <li class="nav-item">
                 <a class="nav-link" href="history.html">History</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
               </li>
             </ul>
 
@@ -136,7 +136,7 @@ https://www.tooplate.com/view/2127-little-fashion
             ><br /><i class="bi bi-archive"></i>
           </a>
           <a
-            href="{% url 'product:add-crop' %}"
+            href="{% url 'products:add-crop' %}"
             class="btn btn-dark col-lg-4 col-4 mb-3 my-custom-btn text-light justify-content-center pt-3 px-5 mx-3 text-center position-relative"
           >
             Add Crops
@@ -174,11 +174,12 @@ https://www.tooplate.com/view/2127-little-fashion
             <div class="col-12 text-center">
               <h2 class="mb-5">Uploaded Crops</h2>
             </div>
+            
             {% for c in crop %}
 
             <div class="col-lg-4 col-6 mb-3">
               <div class="product-thumb">
-                <a href="#">
+                <a href="{{c.get_absolute_url}}">
                   <img style="width: 300px; height: 200px;"
                     src="{% if c.crop_img %}{{c.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}"
                     class="img-fluid rounded mx-auto product-image"
@@ -212,6 +213,7 @@ https://www.tooplate.com/view/2127-little-fashion
               </div>
             </div>
             {% endfor %}
+            
 
             <div class="col-12 text-center">
               <a href="products.html" class="view-all">View All Products</a>

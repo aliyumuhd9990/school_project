@@ -48,10 +48,14 @@ def FarmerLoginViews(request):
 
         user = authenticate(email=email, password=password)
         if user is not None:
-            auth.login(request, user)
-            return redirect(reverse('products:farmer_dash'))
+            if user.role != 'user':
+                auth.login(request, user)
+                return redirect(reverse('products:farmer_dash'))
+            else:
+                messages.error(request, 'Users cannot log in here!!')
+                return redirect('farmer-login')
         else:
-            messages.error(request, 'Invalid Creadentials!!')
+            messages.error(request, 'Invalid Credentials!!')
             return redirect('farmer-login')
     else:
         return render(request, 'farmers_page/farmer-login.html')
@@ -63,8 +67,12 @@ def LoginViews(request):
 
         user = authenticate(email=email, password=password)
         if user is not None:
-            auth.login(request, user)
-            return redirect(reverse('products:index'))
+            if user.role != 'farmer':
+                auth.login(request, user)
+                return redirect(reverse('products:index'))
+            else:
+                messages.error(request, 'Farmers cannot log in here!!')
+                return redirect('login')
         else:
             messages.error(request, 'Invalid Credentials!!')
             return redirect('login')
