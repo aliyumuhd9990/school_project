@@ -8,6 +8,10 @@ app_name = 'orders'
 def CreateOrderView(request):
     cart = Cart.objects.get(user=request.user)
     cart_items = cart.cart_items.all()
+    address = Address.objects.get(user=request.user)
+    user = request.user
+    profile = Profile.objects.get(user=request.user)
+    total_price = sum(item.total_price() for item in cart_items)
     if not cart:
         cart = Cart.objects.create(user=request.user)
     if request.method == 'POST':
@@ -25,6 +29,10 @@ def CreateOrderView(request):
         'cart': cart,
         'cart_items' : cart_items,
         'form' : form,
+        'address' : address,
+        'user' : user,
+        'profile' : profile,
+        'total_price' : total_price,
     }
     return render(request, 'Orders/create.html', context)
     

@@ -144,7 +144,7 @@ def EditAddressView(request):
 
           address.save()
           messages.success(request, 'Address Updated!!')
-          return redirect('account')
+          return redirect('edit-address')
      return render(request, 'accounts/edit-address.html', {'address': address})
 
 @login_required
