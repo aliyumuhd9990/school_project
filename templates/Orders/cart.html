@@ -86,7 +86,7 @@ https://www.tooplate.com/view/2127-little-fashion
         </div>
         {% endfor %}
         <h1>Total: ${{ total_price }}</h1>
-        <a class="btn custom-btn cart-btn" href="{% url 'orders:create_order' %}">Checkout</a>
+        <a class="btn custom-btn cart-btn m-3" href="{% url 'orders:create_order' %}">Checkout</a>
         {% else %}
         <p class="text-center text-dark m-5">Your Carts is Empty!!</p>
         {% endif %}

@@ -65,19 +65,98 @@ https://www.tooplate.com/view/2127-little-fashion
       </header>
       {% include 'components/message.html' %}
       <div class="container">
-          <div class="col-lg-6 col-12 my-5 d-block shadow mx-auto">
-            {% for item in cart  %}
-            <ul>
-                <li>{{ item.quantity }} x {{ item.crop.crop_name}}</li>
-            </ul>
+        <p class="text-center mt-3">
+          {{cart|default:"Cart is empty"}}
+        </p>
+          <div class="col-lg-6 col-12 my-5 d-block shadow mx-auto p-5">
+            <ol>
+            {% for item in cart.cart_items.all  %}
+                <li>{{ item.crop.crop_name}} X {{ item.quantity }}</li>
             {% endfor %}
+            </ol>
+            <p>Total: ${{ cart.get_total_price }}</p>
+            <form method='post'>
+              {% csrf_token %}
+              <div class="form-floating">
+                <input
+                  type="text"
+                  name="fname"
+                  id="fname"
+                  class="form-control"
+                  value="{{crop.crop_name}}"
+                  required
+                />
+
+                <label for="contact">Full Name</label>
+              </div>
+              <br />
+            <div class="form-floating">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                class="form-control"
+                value="{{crop.crop_price}}"
+                required
+              />
+
+              <label for="cprice">Email</label>
+            </div>
+            <br />
+            <div class="form-floating">
+              <input
+                type="tel"
+                name="contact"
+                id="contact"
+                class="form-control"
+                value="{{crop.crop_price}}"
+                required
+              />
+
+              <label for="cprice">Contact</label>
+            </div>
+            <br />
+            <div class="form-floating">
+              <input
+                type="text"
+                name="city"
+                id="contact"
+                class="form-control"
+                value="{{crop.crop_price}}"
+                required
+              />
+
+              <label for="cprice">City</label>
+            </div>
+            <br />
+            <div class="form-floating">
+              <input
+                type="text"
+                name="Location"
+                id="location"
+                class="form-control"
+                value="{{crop.crop_price}}"
+                required
+              />
+
+              <label for="cprice">Location</label>
+            </div>
+            <a href="" class="float-end">Update Your Address</a>
+            <br />
+            <br />
+            
+            
+
+              <div class="d-grid">
+                <button
+                type="submit"
+                class="btn custom-btn cart-btn"
+                >
+                Checkout
+              </button>
+            </div>
+            </form>
           </div>
-          <p>Total: ${{ cart.get_total_price }}</p>
-          <form method='post'>
-            {% csrf_token %}
-            {{form.as_p}}
-            <p><input type="submit" value="Place order"></p>
-          </form>
       </div>
 
     
