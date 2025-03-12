@@ -15,6 +15,13 @@ class Cart(models.Model):
         for item in self.cart.values():
             yield item
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+
+    def clear(self):
+       self.items.all().delete()
+
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
     crop = models.ForeignKey(Crop, on_delete=models.CASCADE)

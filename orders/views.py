@@ -13,16 +13,29 @@ def CreateOrderView(request):
     profile = Profile.objects.get(user=request.user)
     total_price = sum(item.total_price() for item in cart_items)
     if not cart:
-        cart = Cart.objects.create(user=request.user)
+        cart, created = Cart.objects.get_or_create(user=request.user)
     if request.method == 'POST':
-        form = OrderCreateForm(request.POST)
-        if form.is_valid():
-            order = form.save()
-            for item in cart:
-                OrderItem.objects.create(order=order, crop=item['crop'], price=item['price'], quantity=item['quantity'])
+        # form = OrderCreateForm(request.POST)
+        fname = request.POST.get('fname')
+        email = request.POST.get('email')
+        contact = request.POST.get('contact')
+        location = request.POST.get('location')
 
-        cart.clear()
-        return render(request, 'Orders/created.html', {'order': order})
+        order = Order.objects.create(
+            user=request.user,
+            total_price = total_price,
+            fname = fname,
+            emial = email,
+            contact = contact,
+            location = location
+        )
+        
+
+        for item in cart_items:
+            OrderItem.objects.create(order=order, crop=item['crop'], price=item['price'], quantity=item['quantity'])
+            
+        cart.cart_items.clear()
+        return render(request, 'Orders/created.html')
     else:
         form = OrderCreateForm()
     context = {

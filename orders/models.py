@@ -1,5 +1,6 @@
 from django.db import models
 from products.models import *
+from carts.models import *
 
 # Create your models here.
 class Order(models.Model):
@@ -18,7 +19,7 @@ class Order(models.Model):
         return f'Order {self.id}'
 
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+        return sum(item.get_cost() for item in self.cart_items.all())
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
