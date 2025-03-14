@@ -98,7 +98,7 @@ https://www.tooplate.com/view/2127-little-fashion
                 </div>
 
                 <small class="product-price text-muted ms-auto mt-auto mb-5"
-                  >${{crop.crop_price}}</small
+                  >&#8358;{{crop.crop_price}}</small
                 >
               </div>
 
@@ -204,7 +204,7 @@ https://www.tooplate.com/view/2127-little-fashion
                 <p class="product-p">{{c.crop_desc}}</p>
             </div>
             
-            <small class="product-price text-muted ms-auto mt-auto mb-5">${{c.crop_price}}</small>
+            <small class="product-price text-muted ms-auto mt-auto mb-5">&#8358;{{c.crop_price}}</small>
         </div>
     </div>
 </div>
@@ -218,72 +218,57 @@ https://www.tooplate.com/view/2127-little-fashion
 
     <footer class="site-footer">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-10 me-auto mb-4">
-            <h4 class="text-white mb-3">
-              <a href="index.html">Little</a> Fashion
-            </h4>
-            <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">
-              Copyright © 2022 <strong>Little Fashion</strong>
-            </p>
-            <br />
-            <p class="copyright-text">
-              Designed by
-              <a href="https://www.tooplate.com/" target="_blank">Tooplate</a>
-            </p>
+          <div class="row">
+
+              <div class="col-lg-3 col-10 me-auto mb-4">
+                  <h4 class="text-white mb-3"><a href="index.html">KBT</a> Marketplace</h4>
+                  <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2025 <strong>KBT-Marketplace</strong></p>
+                  <br>
+                  <p class="copyright-text">Designed by <a href="#" target="_blank">Aliyu Muhammad Musa</a></p>
+              </div>
+
+              <div class="col-lg-5 col-8">
+                  <h5 class="text-white mb-3">Sitemap</h5>
+
+                  <ul class="footer-menu d-flex flex-wrap">
+                      <li class="footer-menu-item"><a href="about.html" class="footer-menu-link">Story</a></li>
+
+                      <li class="footer-menu-item"><a href="#" class="footer-menu-link">Products</a></li>
+
+                      <li class="footer-menu-item"><a href="#" class="footer-menu-link">Privacy policy</a></li>
+
+                      <li class="footer-menu-item"><a href="#" class="footer-menu-link">FAQs</a></li>
+
+                      <li class="footer-menu-item"><a href="#" class="footer-menu-link">Contact</a></li>
+                  </ul>
+              </div>
+
+              <div class="col-lg-3 col-4">
+                  <h5 class="text-white mb-3">Social</h5>
+
+                  <ul class="social-icon">
+
+                      <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+
+                      <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+
+                      <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+                      <li><a href="#" class="social-icon-link bi-skype"></a></li>
+                  </ul>
+              </div>
+
           </div>
-
-          <div class="col-lg-5 col-8">
-            <h5 class="text-white mb-3">Sitemap</h5>
-
-            <ul class="footer-menu d-flex flex-wrap">
-              <li class="footer-menu-item">
-                <a href="about.html" class="footer-menu-link">Story</a>
-              </li>
-
-              <li class="footer-menu-item">
-                <a href="#" class="footer-menu-link">Products</a>
-              </li>
-
-              <li class="footer-menu-item">
-                <a href="#" class="footer-menu-link">Privacy policy</a>
-              </li>
-
-              <li class="footer-menu-item">
-                <a href="#" class="footer-menu-link">FAQs</a>
-              </li>
-
-              <li class="footer-menu-item">
-                <a href="#" class="footer-menu-link">Contact</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-4">
-            <h5 class="text-white mb-3">Social</h5>
-
-            <ul class="social-icon">
-              <li><a href="#" class="social-icon-link bi-youtube"></a></li>
-
-              <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
-
-              <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-              <li><a href="#" class="social-icon-link bi-skype"></a></li>
-            </ul>
-          </div>
-        </div>
       </div>
-    </footer>
+  </footer>
 
-    
-    <!-- JAVASCRIPT FILES -->
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-      <script src="{% static 'js/Headroom.js' %}"></script>
-      <script src="{% static 'js/jQuery.headroom.js' %}"></script>
-      <script src="{% static 'js/slick.min.js' %}"></script>
-      <script src="{% static 'js/custom.js' %}"></script>
-      <script src="{% static 'js/custom.js' %}"></script>
-  </body>
+<!-- JAVASCRIPT FILES -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/Headroom.js' %}"></script>
+<script src="{% static 'js/jQuery.headroom.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
 </html>

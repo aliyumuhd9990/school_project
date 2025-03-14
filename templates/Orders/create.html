@@ -72,7 +72,7 @@ https://www.tooplate.com/view/2127-little-fashion
             <li>{{ item.crop.crop_name}} X {{ item.quantity }}</li>
             {% endfor %}
           </ol>
-          <p>Total: ${{ total_price }}</p>
+          <p>Total: &#8358;{{ total_price }}</p>
           <form method="post">
             {% csrf_token %}
             <div class="form-floating">
