@@ -117,13 +117,19 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # AUTHENTICATION_BACKENDS = [
 #     'social_core.backends.facebook.FacebookOAuth2',
 #     'social_core.backends.twitter.TwitterOAuth',
 #     'social_core.backends.google.GoogleOAuth2',
 # ]
+
+# CELERY_RESULT_BACKEND = "redis://localhost:6379/0"  
+
+# CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+# CELERY_ACCEPT_CONTENT = ["json"]
+# CELERY_TASK_SERIALIZER = "json"
 
 
 # Internationalization

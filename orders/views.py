@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import *
 from .forms import *
 from carts.models import *
+# from .tasks import order_created
 
 app_name = 'orders'
 # Create your views here.
@@ -32,10 +33,13 @@ def CreateOrderView(request):
         
 
         for item in cart_items:
-            OrderItem.objects.create(order=order, crop=item.crop, price=item.price, quantity=item.quantity)
+            OrderItem.objects.create(order=order, crop=item.crop, price=total_price, quantity=item.quantity)
             
         cart.cart_items.all().delete()
         return render(request, 'Orders/created.html', {'order': order})
+        # order_id = 123  # Example order ID
+        # task = order_created.delay(order_id)
+        # return JsonResponse({"task_id": task.id, "message": "Order processing started!"})
     else:
         form = OrderCreateForm()
     context = {

@@ -8,7 +8,7 @@ class Order(models.Model):
     email = models.EmailField()
     city = models.CharField(max_length=50)
     contact = models.IntegerField()
-    location = models.CharField(max_length=50, default=True, null=True, blank=True)
+    location = models.CharField(max_length=250, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
