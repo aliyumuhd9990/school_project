@@ -94,7 +94,9 @@ https://www.tooplate.com/view/2127-little-fashion
                 <a class="nav-link active" href="#">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'products:view_crop' %}">View Crops</a>
+                <a class="nav-link" href="{% url 'products:view_crop' %}"
+                  >View Crops</a
+                >
               </li>
 
               <li class="nav-item">
@@ -104,12 +106,10 @@ https://www.tooplate.com/view/2127-little-fashion
               </li>
 
               <li class="nav-item position-relative">
-                <a class="nav-link" href="#"
+                <a class="nav-link" href="{% url 'products:order_list' %}"
                   >View Orders
-                  <span class="badge rounded-pill text-white bg-dark"
-                    >4</span
-                  ></a
-                >
+                  <span class="badge rounded-pill text-white bg-dark">4</span>
+                </a>
               </li>
 
               <li class="nav-item">
@@ -131,226 +131,219 @@ https://www.tooplate.com/view/2127-little-fashion
         {% include 'components/message.html' %}
         <div
           style="background-color: #fd7e14"
-          class="mx-auto col-8 text-light p-5 rounded-2 border"
+          class="mx-auto col-lg-8 col-12 text-light p-5 rounded-2 border"
         >
-          <div class="row">
-            <div class="col-8">
-              <h5 class="text-light"><b>Balance:</b></h5>
-              <p class="text-light">&#8358;{{ total_earnings }}</p>
+            <div class="container">
+              <p class="text-light"><b>My Balance:</b>   &#8358;{{ total_earnings }}</p>
             </div>
-            <div class="col-4">
-              <a class="" style="color: white" href="">Withdraw Funds</a>
-            </div>
-          </div>
+           
         </div>
         <div
-          class="container mx-auto row row-cols-6 mt-3 d-flex mx-5 justify-content-center"
+          class="container col-6 mx-auto row  mt-3 d-flex justify-content-between"
         >
           <a
             href="{% url 'products:view_crop' %}"
-            class="btn btn-dark col-lg-4 col-4 mb-3 my-custom-btn text-light justify-content-between pt-3 px-5 pb-3 mx-3 text-center position-relative"
+            class="btn btn-dark col-lg-4 mb-3 my-custom-btn text-light justify-content-center pt-3 pb-3  text-center"
           >
             View Crops
-            <span
-              class="badge traslate-middle rounded-2 bg-secondary position-absolute top-0 start-95"
-              >20</span
-            ><br /><i class="bi bi-archive"></i>
+            <br /><i class="bi bi-archive"></i>
           </a>
           <a
             href="{% url 'products:add-crop' %}"
-            class="btn btn-dark col-lg-4 col-4 mb-3 my-custom-btn text-light justify-content-center pt-3 px-5 mx-3 text-center position-relative"
+            class="btn btn-dark col-lg-4  mb-3 my-custom-btn text-light justify-content-center pt-3  text-center "
           >
             Add Crops
-            <span
-              class="badge traslate-middle rounded-2 bg-secondary position-absolute top-0 start-95"
-              >40</span
-            ><br /><i class="bi bi-card-list"></i>
+            <br /><i class="bi bi-card-list"></i>
           </a>
           <a
-            href="order-page.html"
-            class="btn btn-dark col-lg-4 col-4 mb-3 my-custom-btn text-light justify-content-center pt-3 px-5 mx-3 text-center position-relative"
+            href="{% url 'products:order_list' %}"
+            class="btn btn-dark col-lg-4 mb-3 my-custom-btn text-light justify-content-center pt-3 text-center"
           >
             View Orders
-            <span
-              class="badge traslate-middle rounded-2 bg-secondary position-absolute top-0 start-95"
-              >40</span
-            ><br /><i class="bi bi-card-list"></i>
+            <br /><i class="bi bi-card-list"></i>
           </a>
           <a
             href="order-page.html"
-            class="btn btn-dark col-lg-4 col-4 mb-3 my-custom-btn text-light justify-content-center pt-3 px-5 mx-3 text-center position-relative"
+            class="btn btn-dark col-lg-4 mb-3 my-custom-btn text-light justify-content-center pt-3 text-center "
           >
-            History
-            <span
-              class="badge traslate-middle rounded-2 bg-secondary position-absolute top-0 start-95"
-              >40</span
-            ><br /><i class="bi bi-card-list"></i>
+          Withdraw 
+            <br /><i class="bi bi-card-list"></i>
           </a>
         </div>
       </div>
       <div class="container">
         <h5>Recent Orders</h5>
-        <table class="table border">
-          <tr>
-            <th>Crop</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Status</th>
-          </tr>
-          {% for item in recent_orders %}
-          <tr>
-            <td>{{item.crop.crop_name}}</td>
-            <td>{{item.quantity}}</td>
-            <td>{{item.price}}</td>
-            <td>{% if item.order.paid %}Paid{% else %}Pending{% endif %}</td>
-          </tr>
-          {% endfor %}
-        </table>
-        <div class="col-12 text-center">
-          <a href="products.html" class="view-all">View All</a>
-        </div>
-        <h5>Pending Orders</h5>
-        <table class="table border">
-          <tr>
-            <th>Crop</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr>
-          {%if order_items.crop.paid != "True" %} 
-          {% for item in pending_orders%}
-          <tr>
-            <td>{{item.crop.crop_name}}</td>
-            <td>{{item.quantity}}</td>
-            <td>{{item.price}}</td>
-          </tr>
-          {% endfor %}
-        </table>
-        {% else %}
-        <p class="text-center">There is no pending Order</p>
-        {% endif %}
-      </div>
+        <div class="table table-responsive">
+          <table class="table table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th>Crop</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            {% for item in recent_orders %}
+            <tr>
+              <td>{{item.crop.crop_name}}</td>
+              <td>{{item.quantity}}</td>
+              <td>&#8358;{{item.price}}</td>
+              <td>{% if item.order.paid %}Paid{% else %}Pending{% endif %}</td>
+            </tr>
+            {% endfor %}
+          </table>
+          <div class="col-12 text-center">
+            <a href="{% url 'products:order_list' %}" class="view-all"
+              >View All</a
+            >
+          </div><br>
+          <h5>Pending Orders</h5>
+          <div class="table table-responsive">
+            <table class="table table-striped">
+              <thead class="table-dark">
+                <tr>
+                  <th>Crop</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              {%if order_items.crop.paid != "True" %} 
+              {% for item in pending_orders%}
+              <tr>
+                <td>{{item.crop.crop_name}}</td>
+                <td>{{item.quantity}}</td>
+                <td>&#8358;{{item.price}}</td>
+              </tr>
+              {% endfor %}
+            </table>
+            {% else %}
+            <p class="text-center">There is no pending Order</p>
+            {% endif %}
+          </div>
 
-      <section class="featured-product pb-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-12 text-center">
-              <h2 class="mb-5">Uploaded Crops</h2>
-            </div>
-
-            {% for c in crop %}
-
-            <div class="col-lg-4 col-6 mb-3">
-              <div class="product-thumb">
-                <a href="{{c.get_absolute_url}}">
-                  <img
-                    style="width: 300px; height: 200px"
-                    src="{% if c.crop_img %}{{c.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}"
-                    class="img-fluid rounded mx-auto product-image"
-                    alt="{{c.name}}"
-                  />
-                </a>
-
-                <div class="product-top d-flex">
-                  <span class="product-alert me-auto">New Arrival</span>
-
-                  <a href="#" class="bi-heart-fill product-icon"></a>
+          <section class="featured-product pb-5">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 text-center">
+                  <h2 class="mb-5">Uploaded Crops</h2>
                 </div>
 
-                <div class="product-info d-flex">
-                  <div>
-                    <h5 class="product-title mb-0">
-                      <a
-                        href="{{c.get_absolute_url}}"
-                        class="product-title-link"
-                        >{{c.crop_name}}</a
-                      >
-                    </h5>
+                {% for c in crop %}
 
-                    <p class="product-p">{{c.crop_desc}}</p>
-                    <small class="product-price text-muted mt-auto mx-auto mb-5"
-                      >&#8358;{{c.crop_price}}</small
-                    ><br />
+                <div class="col-lg-4 col-6 mb-3">
+                  <div class="product-thumb">
+                    <a href="{{c.get_absolute_url}}">
+                      <img
+                        style="width: 300px; height: 200px"
+                        src="{% if c.crop_img %}{{c.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}"
+                        class="img-fluid rounded mx-auto product-image"
+                        alt="{{c.name}}"
+                      />
+                    </a>
+
+                    <div class="product-top d-flex">
+                      <span class="product-alert me-auto">New Arrival</span>
+
+                      <a href="#" class="bi-heart-fill product-icon"></a>
+                    </div>
+
+                    <div class="product-info d-flex">
+                      <div>
+                        <h5 class="product-title mb-0">
+                          <a
+                            href="{{c.get_absolute_url}}"
+                            class="product-title-link"
+                            >{{c.crop_name}}</a
+                          >
+                        </h5>
+
+                        <p class="product-p">{{c.crop_desc}}</p>
+                        <small
+                          class="product-price text-muted mt-auto mx-auto mb-5"
+                          >&#8358;{{c.crop_price}}</small
+                        ><br />
+                      </div>
+                    </div>
                   </div>
+                </div>
+                {% endfor %}
+
+                <div class="col-12 text-center">
+                  <a href="{% url 'products:view_crop' %}"" class="view-all">View All Crops</a>
                 </div>
               </div>
             </div>
-            {% endfor %}
-
-            <div class="col-12 text-center">
-              <a href="products.html" class="view-all">View All Products</a>
-            </div>
-          </div>
+          </section>
         </div>
-      </section>
-
-      <footer class="site-footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-10 me-auto mb-4">
-              <h4 class="text-white mb-3">
-                <a href="index.html">KBT</a>-Marketplace
-              </h4>
-              <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">
-                Copyright © 2025 <strong>KBT-Msrkrtplace</strong>
-              </p>
-              <br />
-              <p class="copyright-text">
-                Designed by <a href="#" target="_blank">RandoDev</a>
-              </p>
-            </div>
-
-            <div class="col-lg-5 col-8">
-              <h5 class="text-white mb-3">Sitemap</h5>
-
-              <ul class="footer-menu d-flex flex-wrap">
-                <li class="footer-menu-item">
-                  <a href="about.html" class="footer-menu-link">Story</a>
-                </li>
-
-                <li class="footer-menu-item">
-                  <a href="#" class="footer-menu-link">Products</a>
-                </li>
-
-                <li class="footer-menu-item">
-                  <a href="#" class="footer-menu-link">Privacy policy</a>
-                </li>
-
-                <li class="footer-menu-item">
-                  <a href="#" class="footer-menu-link">FAQs</a>
-                </li>
-
-                <li class="footer-menu-item">
-                  <a href="#" class="footer-menu-link">Contact</a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-lg-3 col-4">
-              <h5 class="text-white mb-3">Social</h5>
-
-              <ul class="social-icon">
-                <li><a href="#" class="social-icon-link bi-youtube"></a></li>
-
-                <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
-
-                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                <li><a href="#" class="social-icon-link bi-skype"></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      <!-- JAVASCRIPT FILES -->
-      <!-- JAVASCRIPT FILES -->
-      <script src="{% static 'js/jquery.min.js' %}"></script>
-      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-      <script src="{% static 'js/Headroom.js' %}"></script>
-      <script src="{% static 'js/jQuery.headroom.js' %}"></script>
-      <script src="{% static 'js/slick.min.js' %}"></script>
-      <script src="{% static 'js/custom.js' %}"></script>
-      <script src="{% static 'js/custom.js' %}"></script>
+      </div>
     </main>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-10 me-auto mb-4">
+            <h4 class="text-white mb-3">
+              <a href="index.html">KBT</a>-Marketplace
+            </h4>
+            <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">
+              Copyright © 2025 <strong>KBT-Msrkrtplace</strong>
+            </p>
+            <br />
+            <p class="copyright-text">
+              Designed by <a href="#" target="_blank">Aliyu Muhammad Musa</a>
+            </p>
+          </div>
+
+          <div class="col-lg-5 col-8">
+            <h5 class="text-white mb-3">Sitemap</h5>
+
+            <ul class="footer-menu d-flex flex-wrap">
+              <li class="footer-menu-item">
+                <a href="about.html" class="footer-menu-link">Story</a>
+              </li>
+
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">Products</a>
+              </li>
+
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">Privacy policy</a>
+              </li>
+
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">FAQs</a>
+              </li>
+
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-4">
+            <h5 class="text-white mb-3">Social</h5>
+
+            <ul class="social-icon">
+              <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+
+              <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+
+              <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+              <li><a href="#" class="social-icon-link bi-skype"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JAVASCRIPT FILES -->
+    <!-- JAVASCRIPT FILES -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/Headroom.js' %}"></script>
+    <script src="{% static 'js/jQuery.headroom.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
   </body>
 </html>

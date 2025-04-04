@@ -108,3 +108,13 @@ def ViewCrops(request):
         'crop' : crop
     }
     return render(request, 'farmers_page/view-crops.html', context)
+
+@login_required
+def OrderListView(request):
+     crop = Crop.objects.filter(farmer=request.user)
+     order_items = OrderItem.objects.filter(crop__in=crop)
+     recent_orders = order_items.order_by('order')
+     context = {
+         'recent_orders': recent_orders,
+     }
+     return render(request, 'farmers_page/order-page.html', context)
