@@ -147,9 +147,9 @@ def EditAddressView(request):
           return redirect('edit-address')
      return render(request, 'accounts/edit-address.html', {'address': address})
 
-@login_required
-def FarmerDashView(request):
-     return render(request, 'farmers_page/farmer-dashboard.html')
+# @login_required
+# def FarmerDashView(request):
+#      return render(request, 'farmers_page/farmer-dashboard.html')
 
 
 @login_required

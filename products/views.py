@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import *
+from orders.models import *
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from django.contrib import messages
@@ -11,10 +12,19 @@ def IndexView(request):
     crop = Crop.objects.all()
     return render(request, 'products/index.html', {'crop': crop})
 
+@login_required
 def FarmerDashView(request):
     crop = Crop.objects.filter(farmer=request.user)
+    order_items = OrderItem.objects.filter(crop__in=crop)
+    total_earnings = sum(item.price for item in order_items if item.order.paid)
+    recent_orders = order_items.order_by('order')[:5]
+    pending_orders = order_items.filter(order__paid=False)[:5]
+
     context = {
         'crop': crop,
+        'total_earnings': total_earnings,
+        'recent_orders': recent_orders,
+        'pending_orders': pending_orders,
     }
     return render(request, 'farmers_page/farmer-dashboard.html', context)
 
@@ -89,3 +99,12 @@ def AboutView(request):
 def EditProductView(request, id):
     crop = Crop.objects.get(id=id)
     return render(request, 'farmers_page/edit-crops.html', {'crop': crop})
+
+@login_required
+def ViewCrops(request):
+    crop = Crop.objects.filter(farmer=request.user)
+
+    context = {
+        'crop' : crop
+    }
+    return render(request, 'farmers_page/view-crops.html', context)

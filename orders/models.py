@@ -31,6 +31,10 @@ class OrderItem(models.Model):
     def __str__(self):
         return str(self.id)
     
+    def save(self, *args, **kwargs):
+        self.price = self.crop.crop_price * self.quantity
+
+        super().save(*args, **kwargs)
     def get_cost(self):
         return self.price * self.quantity
 

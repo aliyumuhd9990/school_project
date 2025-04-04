@@ -38,3 +38,7 @@ class Address(models.Model):
     city = models.CharField(default="Kumbotso", max_length=50)
     street = models.CharField(max_length=100, blank=True)
     location = models.CharField(max_length=100, default=True)
+
+class FarmerProfile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)

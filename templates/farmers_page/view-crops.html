@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -7,24 +8,46 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Farmer-Profile</title>
+    <title>KBT-Marketplace</title>
 
     <!-- CSS FILES -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="{% static 'https://fonts.googleapis.com' %}" />
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap"
+      rel="preconnect"
+      href="{% static 'https://fonts.gstatic.com' %}"
+      crossorigin
+    />
+
+    <link
+      href="{% static 'https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap' %}"
       rel="stylesheet"
     />
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../css/bootstrap-icons.css" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap-icons.css' %}" rel="stylesheet" />
 
-    <link rel="../stylesheet" href="css/slick.css" />
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}" />
 
-    <link href="../css/tooplate-little-fashion.css" rel="stylesheet" />
+    <link
+      href="{% static 'css/tooplate-little-fashion.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/fontawesome.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/brands.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/solid.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!--
 
 Tooplate 2127 Little Fashion
@@ -33,240 +56,99 @@ https://www.tooplate.com/view/2127-little-fashion
 
 -->
   </head>
-
   <body>
-    <section class="preloader">
-      <div class="spinner">
-        <span class="sk-inner-circle"></span>
-      </div>
-    </section>
+    <style>
+      ul {
+        list-style: none;
+      }
+      ul li {
+        margin-left: 15px;
+      }
 
-    <main>
-    
+      ul li a:hover {
+        text-decoration: underline;
+      }
 
-
-      <section class="featured-product section-product mt-5 pt-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-12 text-center">
-              <h2 class="mb-5">Uploaded Crops</h2>
-            </div>
-
-            <div class="col-lg-4 col-6 mb-3">
-              <div class="product-thumb">
-                <a href="farmers-product-details.html">
-                  <img
-                    src="../images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg"
-                    class="img-fluid product-image"
-                    alt=""
-                  />
-                </a>
-
-                <div class="product-top d-flex">
-                  <span class="product-alert me-auto">New Arrival</span>
-
-                  <a href="#" class="bi-heart-fill product-icon"></a>
-                </div>
-
-                <div class="product-info d-flex">
-                  <div>
-                    <h5 class="product-title mb-0">
-                      <a
-                        href="farmers-product-details.html"
-                        class="product-title-link"
-                        >Beans</a
-                      >
-                    </h5>
-
-                    <p class="product-p">Original Beans from Jigawa</p>
-                  </div>
-
-                  <small class="product-price text-muted ms-auto mt-auto mb-5"
-                    >$25</small
-                  ><br />
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-6 mb-3">
-              <div class="product-thumb">
-                <a href="product-detail.html">
-                  <img
-                    src="../images/product/jordan-nix-CkCUvwMXAac-unsplash.jpeg"
-                    class="img-fluid product-image"
-                    alt=""
-                  />
-                </a>
-
-                <div class="product-top d-flex">
-                  <span class="product-alert">Low Price</span>
-
-                  <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                </div>
-
-                <div class="product-info d-flex">
-                  <div>
-                    <h5 class="product-title mb-0">
-                      <a href="product-detail.html" class="product-title-link"
-                        >Fashion Set</a
-                      >
-                    </h5>
-
-                    <p class="product-p">Costume Package</p>
-                  </div>
-
-                  <small class="product-price text-muted ms-auto mt-auto mb-5"
-                    >$35</small
-                  >
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-6">
-              <div class="product-thumb">
-                <a href="product-detail.html">
-                  <img
-                    src="../images/product/nature-zen-3Dn1BZZv3m8-unsplash.jpeg"
-                    class="img-fluid product-image"
-                    alt=""
-                  />
-                </a>
-
-                <div class="product-top d-flex">
-                  <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                </div>
-
-                <div class="product-info d-flex">
-                  <div>
-                    <h5 class="product-title mb-0">
-                      <a href="product-detail.html" class="product-title-link"
-                        >Beans</a
-                      >
-                    </h5>
-
-                    <p class="product-p">Nature made another world</p>
-                  </div>
-
-                  <small class="product-price text-muted ms-auto mt-auto mb-5">
-                    $45</small
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-6">
-              <div class="product-thumb">
-                <a href="product-detail.html">
-                  <img
-                    src="../images/product/nature-zen-3Dn1BZZv3m8-unsplash.jpeg"
-                    class="img-fluid product-image"
-                    alt=""
-                  />
-                </a>
-
-                <div class="product-top d-flex">
-                  <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                </div>
-
-                <div class="product-info d-flex">
-                  <div>
-                    <h5 class="product-title mb-0">
-                      <a href="product-detail.html" class="product-title-link"
-                        >Beans</a
-                      >
-                    </h5>
-
-                    <p class="product-p">Nature made another world</p>
-                  </div>
-
-                  <small class="product-price text-muted ms-auto mt-auto mb-5">
-                    $45</small
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-6">
-              <div class="product-thumb">
-                <a href="product-detail.html">
-                  <img
-                    src="../images/product/nature-zen-3Dn1BZZv3m8-unsplash.jpeg"
-                    class="img-fluid product-image"
-                    alt=""
-                  />
-                </a>
-
-                <div class="product-top d-flex">
-                  <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                </div>
-
-                <div class="product-info d-flex">
-                  <div>
-                    <h5 class="product-title mb-0">
-                      <a href="product-detail.html" class="product-title-link"
-                        >Beans</a
-                      >
-                    </h5>
-
-                    <p class="product-p">Nature made another world</p>
-                  </div>
-
-                  <small class="product-price text-muted ms-auto mt-auto mb-5">
-                    $45</small
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-4 col-6">
-              <div class="product-thumb">
-                <a href="product-detail.html">
-                  <img
-                    src="../images/product/nature-zen-3Dn1BZZv3m8-unsplash.jpeg"
-                    class="img-fluid product-image"
-                    alt=""
-                  />
-                </a>
-
-                <div class="product-top d-flex">
-                  <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                </div>
-
-                <div class="product-info d-flex">
-                  <div>
-                    <h5 class="product-title mb-0">
-                      <a href="product-detail.html" class="product-title-link"
-                        >Beans</a
-                      >
-                    </h5>
-
-                    <p class="product-p">Nature made another world</p>
-                  </div>
-
-                  <small class="product-price text-muted ms-auto mt-auto mb-5">
-                    $45</small
-                  >
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12 text-center">
-              <a href="products.html" class="view-all">View All Products</a>
-            </div>
+      .slc {
+        color: #ff4400;
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: underline;
+        background-color: 3px 3px #ff4400;
+      }
+    </style>
+    <header
+      class="site-header mt-0 section-padding d-flex justify-content-center align-items-center"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-12">
+            <h1>
+              <h1 class="hero-title text-center mb-5">Uploaded Crops</h1>
+            </h1>
           </div>
         </div>
-      </section>
+      </div>
+    </header>
+    <section class="container products section-padding">
+      <div class="container">
+        <div class="row">
+          
+          {% for c in crop %}
+
+          <div class="col-lg-4 col-12 mb-3">
+            <div class="product-thumb">
+              <a href="{{c.get_absolute_url}}">
+                <img
+                  src="{% if c.crop_img %}{{c.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}"
+                  class="img-fluid product-image"
+                  style="width: 400px; height: 350px"
+                  alt=""
+                />
+              </a>
+
+              <div class="product-top d-flex">
+                <span class="product-alert me-auto">New Arrival</span>
+
+                <a href="#" class="bi-heart-fill product-icon"></a>
+              </div>
+
+              <div class="product-info d-flex">
+                <div>
+                  <h5 class="product-title mb-0">
+                    <a href="{{c.get_absolute_url}}" class="product-title-link"
+                      >{{c.crop_name}}</a
+                    >
+                  </h5>
+
+                  <p class="product-p">{{c.crop_desc}}</p>
+                </div>
+
+                <small class="product-price text-muted ms-auto mt-auto mb-5"
+                  >&#8358;{{c.crop_price}}</small
+                >
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
 
       <footer class="site-footer">
         <div class="container">
           <div class="row">
             <div class="col-lg-3 col-10 me-auto mb-4">
               <h4 class="text-white mb-3">
-                <a href="index.html">KBT</a>-Marketplace
+                <a href="index.html">KBT</a> Marketplace
               </h4>
               <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">
-                Copyright © 2025 <strong>KBT-Msrkrtplace</strong>
+                Copyright © 2025 <strong>KBT-Marketplace</strong>
               </p>
               <br />
               <p class="copyright-text">
-                Designed by <a href="#" target="_blank">RandoDev</a>
+                Designed by
+                <a href="#" target="_blank">Aliyu Muhammad Musa</a>
               </p>
             </div>
 
@@ -300,13 +182,21 @@ https://www.tooplate.com/view/2127-little-fashion
               <h5 class="text-white mb-3">Social</h5>
 
               <ul class="social-icon">
-                <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+                <li>
+                  <a href="#" class="social-icon-link bi-youtube"></a>
+                </li>
 
-                <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+                <li>
+                  <a href="#" class="social-icon-link bi-whatsapp"></a>
+                </li>
 
-                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                <li>
+                  <a href="#" class="social-icon-link bi-instagram"></a>
+                </li>
 
-                <li><a href="#" class="social-icon-link bi-skype"></a></li>
+                <li>
+                  <a href="#" class="social-icon-link bi-skype"></a>
+                </li>
               </ul>
             </div>
           </div>
@@ -314,12 +204,11 @@ https://www.tooplate.com/view/2127-little-fashion
       </footer>
 
       <!-- JAVASCRIPT FILES -->
-      <script src="../js/jquery.min.js"></script>
-      <script src="../js/bootstrap.bundle.min.js"></script>
-      <script src="../js/Headroom.js"></script>
-      <script src="../js/jQuery.headroom.js"></script>
-      <script src="../js/slick.min.js"></script>
-      <script src="../js/custom.js"></script>
-    </main>
+      <script src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'js/Headroom.js' %}"></script>
+      <script src="{% static 'js/jQuery.headroom.js' %}"></script>
+      <script src="{% static 'js/slick.min.js' %}"></script>
+      <script src="{% static 'js/custom.js' %}"></script>
   </body>
 </html>

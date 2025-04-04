@@ -3,16 +3,33 @@ from .models import *
 from .forms import *
 from carts.models import *
 # from .tasks import order_created
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from .models import Order
 
 app_name = 'orders'
+
 # Create your views here.
+def approve_payment_view(request, order_id):
+    if request.user.is_superuser:  # Ensure only admins can approve
+        order = get_object_or_404(Order, id=order_id, status="Pending")
+        order.status = "Paid"
+        order.farmer.balance += order.amount  # Update farmer balance
+        order.farmer.save()
+        order.save()
+        return JsonResponse({"message": "Payment approved successfully", "new_balance": order.farmer.balance})
+    return JsonResponse({"error": "Unauthorized"}, status=403)
+
 def CreateOrderView(request):
     cart = Cart.objects.get(user=request.user)
     cart_items = cart.cart_items.all()
+    order = None
     address = Address.objects.get(user=request.user)
     user = request.user
     profile = Profile.objects.get(user=request.user)
+    # total_price = sum(item.total_price() for item in cart_items)
     total_price = sum(item.total_price() for item in cart_items)
+    
     if not cart:
         cart, created = Cart.objects.get_or_create(user=request.user)
     if request.method == 'POST':
@@ -33,7 +50,12 @@ def CreateOrderView(request):
         
 
         for item in cart_items:
-            OrderItem.objects.create(order=order, crop=item.crop, price=total_price, quantity=item.quantity)
+            OrderItem.objects.create(
+                order=order, 
+                crop=item.crop, 
+                price=item.total_price, 
+                quantity=item.quantity
+                )
             
         cart.cart_items.all().delete()
         return render(request, 'Orders/created.html', {'order': order})

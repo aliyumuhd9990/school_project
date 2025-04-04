@@ -5,6 +5,7 @@ app_name = 'products'
 urlpatterns = [
     path('', IndexView, name='index'),
     path('farmer-dash/', FarmerDashView, name='farmer_dash'),
+    path('view-crops/', ViewCrops, name='view_crop'),
     path('about/', AboutView, name='about'),
     path('products/',  ProductView, name='products'),
     path('products-list/',  ProductListView, name='products-list'),

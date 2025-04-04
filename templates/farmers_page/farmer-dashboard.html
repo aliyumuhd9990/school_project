@@ -33,9 +33,21 @@
       href="{% static 'css/tooplate-little-fashion.css '%}"
       rel="stylesheet"
     />
-    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <link
+      href="{% static 'fontawesomefree/css/fontawesome.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/brands.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/solid.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!--
 
 Tooplate 2127 Little Fashion
@@ -55,29 +67,40 @@ https://www.tooplate.com/view/2127-little-fashion
     <main>
       <nav class="navbar navbar-expand-lg mb-5">
         <div class="container-fluid">
-          <a class="navbar-brand me-5"  href="#"><span style="color: #FF4400;" >KBT</span>-Marketplace</a>
+          <a class="navbar-brand me-5" href="#"
+            ><span style="color: #ff4400">KBT</span>-Marketplace</a
+          >
           <div class="d-flex d-lg-none">
             <div class="d-flex me-4 mt-2">
               <a href="{% url 'account' %}" class="col-lg-4 me-2">
                 <i class="fa-regular fa-user"></i>
               </a>
-              
+            </div>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarTogglerDemo01"
+              aria-controls="navbarTogglerDemo01"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
           </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav mx-auto">
               <li class="nav-item">
                 <a class="nav-link active" href="#">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">View Crops</a>
+                <a class="nav-link" href="{% url 'products:view_crop' %}">View Crops</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'products:add-crop' %}">Add Crops</a>
+                <a class="nav-link" href="{% url 'products:add-crop' %}"
+                  >Add Crops</a
+                >
               </li>
 
               <li class="nav-item position-relative">
@@ -103,22 +126,20 @@ https://www.tooplate.com/view/2127-little-fashion
         </div>
       </nav>
       <div
-      class="container col-lg-8 mx-auto col-12 section-padding shadow-sm mt-5 mb-5"
+        class="container col-lg-8 mx-auto col-12 section-padding shadow-sm mt-5 mb-5"
       >
-      {% include 'components/message.html' %}
+        {% include 'components/message.html' %}
         <div
           style="background-color: #fd7e14"
           class="mx-auto col-8 text-light p-5 rounded-2 border"
         >
           <div class="row">
-            <div class="col-6">
+            <div class="col-8">
               <h5 class="text-light"><b>Balance:</b></h5>
-              <p class="text-light">1000%</p>
+              <p class="text-light">&#8358;{{ total_earnings }}</p>
             </div>
-            <div class="col-6">
-              <a class="" style="color: white" href=""
-                >View Transaction History</a
-              >
+            <div class="col-4">
+              <a class="" style="color: white" href="">Withdraw Funds</a>
             </div>
           </div>
         </div>
@@ -126,7 +147,7 @@ https://www.tooplate.com/view/2127-little-fashion
           class="container mx-auto row row-cols-6 mt-3 d-flex mx-5 justify-content-center"
         >
           <a
-            href="view-crops.html"
+            href="{% url 'products:view_crop' %}"
             class="btn btn-dark col-lg-4 col-4 mb-3 my-custom-btn text-light justify-content-between pt-3 px-5 pb-3 mx-3 text-center position-relative"
           >
             View Crops
@@ -167,6 +188,47 @@ https://www.tooplate.com/view/2127-little-fashion
           </a>
         </div>
       </div>
+      <div class="container">
+        <h5>Recent Orders</h5>
+        <table class="table border">
+          <tr>
+            <th>Crop</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Status</th>
+          </tr>
+          {% for item in recent_orders %}
+          <tr>
+            <td>{{item.crop.crop_name}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.price}}</td>
+            <td>{% if item.order.paid %}Paid{% else %}Pending{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        <div class="col-12 text-center">
+          <a href="products.html" class="view-all">View All</a>
+        </div>
+        <h5>Pending Orders</h5>
+        <table class="table border">
+          <tr>
+            <th>Crop</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+          {%if order_items.crop.paid != "True" %} 
+          {% for item in pending_orders%}
+          <tr>
+            <td>{{item.crop.crop_name}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.price}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p class="text-center">There is no pending Order</p>
+        {% endif %}
+      </div>
 
       <section class="featured-product pb-5">
         <div class="container">
@@ -174,13 +236,14 @@ https://www.tooplate.com/view/2127-little-fashion
             <div class="col-12 text-center">
               <h2 class="mb-5">Uploaded Crops</h2>
             </div>
-            
+
             {% for c in crop %}
 
             <div class="col-lg-4 col-6 mb-3">
               <div class="product-thumb">
                 <a href="{{c.get_absolute_url}}">
-                  <img style="width: 300px; height: 200px;"
+                  <img
+                    style="width: 300px; height: 200px"
                     src="{% if c.crop_img %}{{c.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}"
                     class="img-fluid rounded mx-auto product-image"
                     alt="{{c.name}}"
@@ -205,15 +268,13 @@ https://www.tooplate.com/view/2127-little-fashion
 
                     <p class="product-p">{{c.crop_desc}}</p>
                     <small class="product-price text-muted mt-auto mx-auto mb-5"
-                      >${{c.crop_price}}</small
-                    ><br>
+                      >&#8358;{{c.crop_price}}</small
+                    ><br />
                   </div>
-
                 </div>
               </div>
             </div>
             {% endfor %}
-            
 
             <div class="col-12 text-center">
               <a href="products.html" class="view-all">View All Products</a>
