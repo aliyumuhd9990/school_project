@@ -138,6 +138,7 @@ https://www.tooplate.com/view/2127-little-fashion
             </div>
            
         </div>
+        {% comment %} 
         <div
           class="container col-6 mx-auto row  mt-3 d-flex justify-content-between"
         >
@@ -169,7 +170,24 @@ https://www.tooplate.com/view/2127-little-fashion
           Withdraw 
             <br /><i class="bi bi-card-list"></i>
           </a>
+        </div> {% endcomment %}
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col-6 mb-3">
+              <a href="{% url 'products:view_crop' %}" class="btn btn-dark  w-100 p-3">View Crops</a>
+            </div>
+            <div class="col-6 mb-3">
+              <a href="{% url 'products:add-crop' %}" class="btn btn-dark w-100 p-3">Add Crops</a>
+            </div><br>
+            <div class="col-6 mb-3">
+              <a href="{% url 'products:order_list' %}" class="btn btn-dark w-100 p-3">View Orders</a>
+            </div>
+            <div class="col-6 mb-3">
+              <a href="order-page.html" class="btn btn-dark w-100 p-3">Withdraw</a>
+            </div>
+          </div>
         </div>
+        
       </div>
       <div class="container">
         <h5>Recent Orders</h5>
@@ -216,6 +234,11 @@ https://www.tooplate.com/view/2127-little-fashion
               </tr>
               {% endfor %}
             </table>
+            <div class="col-12 text-center">
+              <a href="{% url 'products:order_list' %}" class="view-all"
+                >View All</a
+              >
+            </div><br>
             {% else %}
             <p class="text-center">There is no pending Order</p>
             {% endif %}

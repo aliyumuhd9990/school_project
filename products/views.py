@@ -5,6 +5,7 @@ from orders.models import *
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 app_name = 'products'
 
@@ -102,7 +103,19 @@ def EditProductView(request, id):
 
 @login_required
 def ViewCrops(request):
-    crop = Crop.objects.filter(farmer=request.user)
+    # crop = Crop.objects.filter(farmer=request.user)
+    object_list = Crop.objects.filter(farmer=request.user)
+    #3 post in each page
+    paginator = Paginator(object_list, 6)
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        #if page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        #if page is out of range deliver last page of result
+        posts = paginator.page(paginator.num_pages)
 
     context = {
         'crop' : crop
