@@ -52,5 +52,19 @@ class Crop(models.Model):
                 counter += 1
         super().save(*args, **kwargs)
 
+class withdrawalRequest(models.Model):
+    farmer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, limit_choices_to={'role': 'farmer'})
+    bank_name = models.CharField(max_length = 150)
+    account_name = models.CharField(max_length = 150)
+    account_num = models.CharField(max_length = 150)
+    withdrawal_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    paid = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.bank_name
+    
+    
+    
+
     
 

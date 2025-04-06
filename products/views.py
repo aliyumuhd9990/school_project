@@ -15,7 +15,7 @@ def IndexView(request):
 
 @login_required
 def FarmerDashView(request):
-    crop = Crop.objects.filter(farmer=request.user)
+    crop = Crop.objects.filter(farmer=request.user)[:6]
     order_items = OrderItem.objects.filter(crop__in=crop)
     total_earnings = sum(item.price for item in order_items if item.order.paid)
     recent_orders = order_items.order_by('order')[:5]
@@ -105,7 +105,7 @@ def EditProductView(request, id):
 def ViewCrops(request):
     # crop = Crop.objects.filter(farmer=request.user)
     object_list = Crop.objects.filter(farmer=request.user)
-    #3 post in each page
+    #6 post in each page
     paginator = Paginator(object_list, 6)
     page = request.GET.get('page')
     try:
@@ -118,7 +118,8 @@ def ViewCrops(request):
         posts = paginator.page(paginator.num_pages)
 
     context = {
-        'crop' : crop
+        'crop' : posts,
+        'page' : page,
     }
     return render(request, 'farmers_page/view-crops.html', context)
 
@@ -127,7 +128,62 @@ def OrderListView(request):
      crop = Crop.objects.filter(farmer=request.user)
      order_items = OrderItem.objects.filter(crop__in=crop)
      recent_orders = order_items.order_by('order')
+    #6 post in each page
+     paginator = Paginator(recent_orders, 5)
+     page = request.GET.get('page')
+     try:
+        posts = paginator.page(page)
+     except PageNotAnInteger:
+        #if page is not an integer deliver the first page
+        posts = paginator.page(1)
+     except EmptyPage:
+        #if page is out of range deliver last page of result
+        posts = paginator.page(paginator.num_pages)
+
      context = {
-         'recent_orders': recent_orders,
+         'recent_orders': posts,
+         'page': page,
+         
      }
      return render(request, 'farmers_page/order-page.html', context)
+@login_required
+def PendingListView(request):
+     crop = Crop.objects.filter(farmer=request.user)
+     order_items = OrderItem.objects.filter(crop__in=crop)
+     pending_orders = order_items.filter(order__paid=False)
+    
+    #6 post in each page
+     paginator = Paginator(pending_orders, 5)
+     page = request.GET.get('page')
+     try:
+        posts = paginator.page(page)
+     except PageNotAnInteger:
+        #if page is not an integer deliver the first page
+        posts = paginator.page(1)
+     except EmptyPage:
+        #if page is out of range deliver last page of result
+        posts = paginator.page(paginator.num_pages)
+
+     context = {
+         'pending_orders': posts,
+         'page': page,
+         
+     }
+     return render(request, 'farmers_page/pending-page.html', context)
+
+@login_required
+def withdrawView(request):
+    if request.method == "POST":
+        bank_name = request.POST.get('bank_name')
+        account_name = request.POST.get('account_name')
+        account_num = request.POST.get('account_num')
+        withdrawal_amount = request.POST.get('amount')
+
+        withdraw = withdrawalRequest.objects.create(farmer=request.user, bank_name=bank_name, account_name=account_name, account_num=account_num, withdrawal_amount=withdrawal_amount)
+        withdraw.save()
+        messages.success(request, 'Withdrawal Request Sent Successfully!!')
+        return redirect(reverse('products:farmer_dash'))
+    else:
+        pass
+        
+    return render(request, 'farmers_page/withdraw.html')

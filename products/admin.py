@@ -14,4 +14,9 @@ class CropAdmin(admin.ModelAdmin):
     list_editable = ['crop_price', 'available']
     prepopulated_fields = {'slug': ('crop_name',)}
 
+@admin.register(withdrawalRequest)
+class withdrawalRequestAdmin(admin.ModelAdmin):
+    list_display = ('bank_name', 'account_name', 'withdrawal_amount', 'paid')
+    list_filter = ['bank_name', 'withdrawal_amount', 'paid']
+
 

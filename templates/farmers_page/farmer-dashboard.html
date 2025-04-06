@@ -183,7 +183,7 @@ https://www.tooplate.com/view/2127-little-fashion
               <a href="{% url 'products:order_list' %}" class="btn btn-dark w-100 p-3">View Orders</a>
             </div>
             <div class="col-6 mb-3">
-              <a href="order-page.html" class="btn btn-dark w-100 p-3">Withdraw</a>
+              <a href="{% url 'products:withdraw_page' %}" class="btn btn-dark w-100 p-3">Withdraw</a>
             </div>
           </div>
         </div>
@@ -235,7 +235,7 @@ https://www.tooplate.com/view/2127-little-fashion
               {% endfor %}
             </table>
             <div class="col-12 text-center">
-              <a href="{% url 'products:order_list' %}" class="view-all"
+              <a href="{% url 'products:pending_order_list' %}" class="view-all"
                 >View All</a
               >
             </div><br>

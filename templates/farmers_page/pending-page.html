@@ -84,7 +84,7 @@ https://www.tooplate.com/view/2127-little-fashion
         <div class="row">
           <div class="col-lg-10 col-12">
             <h1>
-              <h1 class="hero-title text-center mb-5">Orders List</h1>
+              <h1 class="hero-title text-center mb-5">Pending Orders</h1>
             </h1>
           </div>
         </div>
@@ -101,16 +101,14 @@ https://www.tooplate.com/view/2127-little-fashion
                             <td>Crop</td>
                             <td>Quntity</td>
                             <td>Price</td>
-                            <td>Status</td>
                       
                     </thead>
                     <tbody>
-                      {% for item in recent_orders %}
+                      {% for item in pending_orders %}
           <tr>
             <td>{{item.crop.crop_name}}</td>
             <td>{{item.quantity}}</td>
             <td>{{item.price}}</td>
-            <td>{% if item.order.paid %}Paid{% else %}Pending{% endif %}</td>
           </tr>
           {% endfor %}
                       
@@ -123,7 +121,7 @@ https://www.tooplate.com/view/2127-little-fashion
                 
                 
                 <div class="col-12 text-center">
-              {% include 'components/pagination.html' with page=recent_orders %}
+              {% include 'components/pagination.html' with page=pending_orders %}
             </div>
           </div>
         </div>
