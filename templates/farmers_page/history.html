@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -7,24 +8,46 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>History</title>
+    <title>KBT-Marketplace</title>
 
     <!-- CSS FILES -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="{% static 'https://fonts.googleapis.com' %}" />
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap"
+      rel="preconnect"
+      href="{% static 'https://fonts.gstatic.com' %}"
+      crossorigin
+    />
+
+    <link
+      href="{% static 'https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap' %}"
       rel="stylesheet"
     />
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../css/bootstrap-icons.css" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap-icons.css' %}" rel="stylesheet" />
 
-    <link rel="../stylesheet" href="css/slick.css" />
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}" />
 
-    <link href="../css/tooplate-little-fashion.css" rel="stylesheet" />
+    <link
+      href="{% static 'css/tooplate-little-fashion.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/fontawesome.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/brands.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/solid.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!--
 
 Tooplate 2127 Little Fashion
@@ -40,34 +63,63 @@ https://www.tooplate.com/view/2127-little-fashion
         <span class="sk-inner-circle"></span>
       </div>
     </section>
+    <style>
+      ul {
+        list-style: none;
+      }
+      ul li {
+        margin-left: 15px;
+      }
 
+      ul li a:hover {
+        text-decoration: underline;
+      }
+
+      .slc {
+        color: #ff4400;
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: underline;
+        background-color: 3px 3px #ff4400;
+      }
+    </style>
+    <header
+      class="site-header mt-0 section-padding d-flex justify-content-center align-items-center"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-12">
+            <h1>
+              <h1 class="hero-title text-center mb-5">Withdrawal History</h1>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </header>
     <main>
 
       <section class="featured-product section-padding mt-5">
         <div class="container">
           <div class="row">
-            <div class="col-12 text-center">
-              <h2 class="mb-5">History</h2>
-            </div>
-
+           
             <div class="table table-responsive ">
                 <table class="table table-striped">
                     <thead class="table-dark">
                             <td>Bank Name</td>
-                            <td>Account Name</td>
                             <td>Account Number</td>
                             <td>Amount</td>
                             <td>Status</td>
                       
                     </thead>
                     <tbody>
+                      {% for hist in history %}
                       <tr>
-                        <td>08026761796</td>
-                        <td>Beans</td>
-                        <td>Beans from Jos State</td>
-                        <td>$25</td>
-                        <td>pending</td>
+                        <td>{{hist.bank_name}}</td>
+                        <td>{{hist.account_num}}</td>
+                        <td>&#8358;{{hist.withdrawal_amount}}</td>
+                        <td>{% if hist.paid == True %}<span style="background-color: green; color: white; padding: 5px; border-radius: 3px;">Paid</span>{% else %}<span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">Pending</span>{% endif %}</td>
                       </tr>
+                      {% endfor %}
                       
                     </tbody>
                   </table>
@@ -95,7 +147,7 @@ https://www.tooplate.com/view/2127-little-fashion
               </p>
               <br />
               <p class="copyright-text">
-                Designed by <a href="#" target="_blank">RandoDev</a>
+                Designed by <a href="#" target="_blank">Aliyu Muhammad Musa</a>
               </p>
             </div>
 
@@ -142,13 +194,13 @@ https://www.tooplate.com/view/2127-little-fashion
         </div>
       </footer>
 
-      <!-- JAVASCRIPT FILES -->
-      <script src="../js/jquery.min.js"></script>
-      <script src="../js/bootstrap.bundle.min.js"></script>
-      <script src="../js/Headroom.js"></script>
-      <script src="../js/jQuery.headroom.js"></script>
-      <script src="../js/slick.min.js"></script>
-      <script src="../js/custom.js"></script>
+<!-- JAVASCRIPT FILES -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/Headroom.js' %}"></script>
+<script src="{% static 'js/jQuery.headroom.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
     </main>
   </body>
 </html>

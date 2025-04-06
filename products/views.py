@@ -187,3 +187,16 @@ def withdrawView(request):
         pass
         
     return render(request, 'farmers_page/withdraw.html')
+
+def removeCrop(request, id):
+    crop = Crop.objects.get(id=id)
+    crop.delete()
+    messages.success(request, "Crop Removed Successfull!!")
+    return redirect(reverse('products:farmer_dash'))
+
+def historyView(request):
+    history = withdrawalRequest.objects.filter(farmer=request.user)
+    context = {
+        'history' : history,
+    }
+    return render(request, 'farmers_page/history.html', context)

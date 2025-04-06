@@ -110,7 +110,7 @@ https://www.tooplate.com/view/2127-little-fashion
             <td>{{item.crop.crop_name}}</td>
             <td>{{item.quantity}}</td>
             <td>{{item.price}}</td>
-            <td>{% if item.order.paid %}Paid{% else %}Pending{% endif %}</td>
+            <td>{% if item.order.paid %}<span style="background-color: green; color: white; padding: 5px; border-radius: 3px;">Paid</span>{% else %}<span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">Pending</span>{% endif %}</td>
           </tr>
           {% endfor %}
                       

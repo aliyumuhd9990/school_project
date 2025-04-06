@@ -118,7 +118,7 @@ https://www.tooplate.com/view/2127-little-fashion
                   </a>
                 </div>
                 <div class="col-lg-6 col-12 mt-4 mt-lg-0">
-                  <a href="" class="btn custom-btn cart-btn"> Remove Crop </a>
+                  <a href="{% url 'products:remove_crop' crop.id%}" class="btn custom-btn cart-btn"> Remove Crop </a>
                 </div>
 
                 <p>
@@ -186,7 +186,7 @@ https://www.tooplate.com/view/2127-little-fashion
 <div class="col-lg-4 col-12 mb-3">
     <div class="product-thumb">
         <a href="{{c.get_absolute_url}}">
-            <img src="{% if c.crop_img %}{{c.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}" class="img-fluid product-image" style="width: 350px; height: 300px;" alt="">
+            <img src="{% if c.crop_img %}{{c.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}" class="img-fluid product-image" style="width: 300px; height: 250px;" alt="">
         </a>
         
         <div class="product-top d-flex">

@@ -113,7 +113,7 @@ https://www.tooplate.com/view/2127-little-fashion
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="history.html">History</a>
+                <a class="nav-link" href="{% url 'products:history_view' %}">History</a>
               </li>
             </ul>
 
@@ -138,39 +138,7 @@ https://www.tooplate.com/view/2127-little-fashion
             </div>
            
         </div>
-        {% comment %} 
-        <div
-          class="container col-6 mx-auto row  mt-3 d-flex justify-content-between"
-        >
-          <a
-            href="{% url 'products:view_crop' %}"
-            class="btn btn-dark col-lg-4 mb-3 my-custom-btn text-light justify-content-center pt-3 pb-3  text-center"
-          >
-            View Crops
-            <br /><i class="bi bi-archive"></i>
-          </a>
-          <a
-            href="{% url 'products:add-crop' %}"
-            class="btn btn-dark col-lg-4  mb-3 my-custom-btn text-light justify-content-center pt-3  text-center "
-          >
-            Add Crops
-            <br /><i class="bi bi-card-list"></i>
-          </a>
-          <a
-            href="{% url 'products:order_list' %}"
-            class="btn btn-dark col-lg-4 mb-3 my-custom-btn text-light justify-content-center pt-3 text-center"
-          >
-            View Orders
-            <br /><i class="bi bi-card-list"></i>
-          </a>
-          <a
-            href="order-page.html"
-            class="btn btn-dark col-lg-4 mb-3 my-custom-btn text-light justify-content-center pt-3 text-center "
-          >
-          Withdraw 
-            <br /><i class="bi bi-card-list"></i>
-          </a>
-        </div> {% endcomment %}
+
         <div class="container mt-4">
           <div class="row">
             <div class="col-6 mb-3">
@@ -206,7 +174,7 @@ https://www.tooplate.com/view/2127-little-fashion
               <td>{{item.crop.crop_name}}</td>
               <td>{{item.quantity}}</td>
               <td>&#8358;{{item.price}}</td>
-              <td>{% if item.order.paid %}Paid{% else %}Pending{% endif %}</td>
+              <td>{% if item.order.paid %}<span style="background-color: green; color: white; padding: 5px; border-radius: 3px;">Paid</span>{% else %}<span style="background-color: red; color: white; padding: 5px; border-radius: 3px;">Pending</span>{% endif %}</td>
             </tr>
             {% endfor %}
           </table>
