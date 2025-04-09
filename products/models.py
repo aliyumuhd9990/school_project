@@ -63,6 +63,17 @@ class withdrawalRequest(models.Model):
     def __str__(self):
         return self.bank_name
     
+    def save(self, *args, **kwargs):
+        if self.pk:
+            old = withdrawalRequest.objects.get(pk=self.pk)
+            if not old.paid and self.paid:
+                if self.farmer.FarmerProfile.balance >= self.withdrawal_amount:
+                    self.farmer.FarmerProfile.balance -= self.withdrawal_amount
+                    self.farmer.FarmerProfile.save()
+                else:
+                    raise ValueError("Insufficient balance")
+                super().save(*args, **kwargs)
+    
     
     
 

@@ -47,6 +47,7 @@ def CreateOrderView(request):
             contact = contact,
             location = location
         )
+        order.save()
         
 
         for item in cart_items:
@@ -56,6 +57,7 @@ def CreateOrderView(request):
                 price=item.total_price, 
                 quantity=item.quantity
                 )
+            
             
         cart.cart_items.all().delete()
         return render(request, 'Orders/created.html', {'order': order})

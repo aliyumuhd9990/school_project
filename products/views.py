@@ -15,11 +15,14 @@ def IndexView(request):
 
 @login_required
 def FarmerDashView(request):
+    farmer_profile, Created = FarmerProfile.objects.get_or_create(user=request.user)
+    
     crop = Crop.objects.filter(farmer=request.user)[:6]
     order_items = OrderItem.objects.filter(crop__in=crop)
-    total_earnings = sum(item.price for item in order_items if item.order.paid)
+    total_earnings = request.user.farmer_profile.balance
     recent_orders = order_items.order_by('order')[:5]
     pending_orders = order_items.filter(order__paid=False)[:5]
+
 
     context = {
         'crop': crop,
@@ -56,7 +59,7 @@ def AddProductView(request):
         crop.crop_name
         crop.save()
         messages.success(request, 'Crops Added Successfully!!')
-        return redirect(reverse('products:farmer_dash'))
+        return redirect(reverse('products:add-crop'))
     else:
         return render(request, 'farmers_page/add-crops.html')
     
@@ -184,7 +187,8 @@ def withdrawView(request):
         messages.success(request, 'Withdrawal Request Sent Successfully!!')
         return redirect(reverse('products:farmer_dash'))
     else:
-        pass
+        messages.error(request, 'Fill the form!!')
+        return redirect(reverse('products:farmer_dash'))
         
     return render(request, 'farmers_page/withdraw.html')
 

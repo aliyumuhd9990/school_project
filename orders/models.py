@@ -18,6 +18,15 @@ class Order(models.Model):
     
     def __str__(self):
         return f'Order {self.id}'
+    
+    def save(self, *args, **kwargs):
+            if self.pk:
+                old = Order.objects.get(pk=self.pk)
+                if not paid and self.paid:
+                    for item in self.order_items.all():
+                        self.farmer.FarmerProfile.balance += item.price
+                    self.farmer.FarmerProfile.save()
+                super().save(*args, **kwargs)
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.cart_items.all())
