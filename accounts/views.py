@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import CustomUser, Profile, Address
+from .models import CustomUser, Profile, Address, FarmerProfile
 from django.contrib.auth import authenticate
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
@@ -35,6 +35,8 @@ def SignupViews(request):
                 new_address.save()
 
                 if user.role == 'user':
+                    user_model = FarmerProfile.objects.get(email=email)
+                    new_profile = Profile.objects.create(user=user_model, balance=0.00, total_earned=0.00)
                     return redirect('login')
                 else:
                     return redirect('farmer-login')

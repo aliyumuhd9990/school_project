@@ -40,5 +40,6 @@ class Address(models.Model):
     location = models.CharField(max_length=100, default=True)
 
 class FarmerProfile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='farmer_profile')
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    total_earned = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)

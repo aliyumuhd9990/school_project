@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 from carts.models import *
@@ -6,6 +6,7 @@ from carts.models import *
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from .models import Order
+from django.urls import reverse
 
 app_name = 'orders'
 
@@ -58,7 +59,8 @@ def CreateOrderView(request):
                 )
             
         cart.cart_items.all().delete()
-        return render(request, 'Orders/created.html', {'order': order})
+        request.session['order_id'] = order.id
+        return redirect(reverse('payment:process'))
         # order_id = 123  # Example order ID
         # task = order_created.delay(order_id)
         # return JsonResponse({"task_id": task.id, "message": "Order processing started!"})

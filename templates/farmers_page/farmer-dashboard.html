@@ -137,7 +137,7 @@ https://www.tooplate.com/view/2127-little-fashion
         >
           <div class="container">
             <p class="text-light">
-              <b>My Balance:</b> &#8358;{{ farmer_profile.balance }}
+              <b>My Balance:</b> &#8358;{{ total_earnings }}
             </p>
           </div>
         </div>
@@ -231,8 +231,8 @@ https://www.tooplate.com/view/2127-little-fashion
                   <th>Price</th>
                 </tr>
               </thead>
-              {%if order_items.crop.paid != "True" %} {% for item in
-              pending_orders%}
+              {%if order_items.crop.paid != "True" %} 
+              {% for item in pending_orders%}
               <tr>
                 <td>{{item.crop.crop_name}}</td>
                 <td>{{item.quantity}}</td>

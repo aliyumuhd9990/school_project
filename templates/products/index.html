@@ -69,12 +69,12 @@
             </div>
             {% for c in crop %}
             
-            <div class="col-lg-4 col-12 mb-3">
+            <div class="col-lg-4 col-6 mb-3">
                 <div class="product-thumb">
                     <a href="{{c.get_absolute_url}}">
                         <img src="{% if c.crop_img %}{{c.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}"
                         class="img-fluid product-image"
-                        style="width: 400px; height: 350px"
+                        style="width: 300px; height: 200px"
                         alt="">
                     </a>
                     

@@ -20,6 +20,10 @@ class AddressAdmin(admin.ModelAdmin):
         'user', 'state', 'city', 'street'
     ]
 
+@admin.register(FarmerProfile)
+class FarmerProfileAdmin(admin.ModelAdmin):
+    pass
+
 
 
 # admin.site.register(CustomUser)

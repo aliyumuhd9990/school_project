@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import *
 from orders.models import *
+from accounts.models import *
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from decimal import Decimal
 # Create your views here.
 app_name = 'products'
 
@@ -17,13 +19,24 @@ def IndexView(request):
 def FarmerDashView(request):
     crop = Crop.objects.filter(farmer=request.user)[:6]
     order_items = OrderItem.objects.filter(crop__in=crop)
-    total_earnings = sum(item.price for item in order_items if item.order.paid)
     recent_orders = order_items.order_by('order')[:5]
     pending_orders = order_items.filter(order__paid=False)[:5]
+    farmer_profile, created = FarmerProfile.objects.get_or_create(user=request.user)
+
+    if farmer_profile.total_earned == 0.00:
+        total_earned = 0
+        for item in order_items:
+            if item.order.paid == True:
+                total_earned += item.price
+
+        farmer_profile.total_earned = total_earned
+        farmer_profile.balance = total_earned
+        farmer_profile.save()
+
 
     context = {
         'crop': crop,
-        'total_earnings': total_earnings,
+        'total_earnings': farmer_profile.balance,
         'recent_orders': recent_orders,
         'pending_orders': pending_orders,
     }
@@ -178,11 +191,20 @@ def withdrawView(request):
         account_name = request.POST.get('account_name')
         account_num = request.POST.get('account_num')
         withdrawal_amount = request.POST.get('amount')
+        withdrawal_amount = Decimal(withdrawal_amount)
+        farmer_profile, created = FarmerProfile.objects.get_or_create(user=request.user)
 
-        withdraw = withdrawalRequest.objects.create(farmer=request.user, bank_name=bank_name, account_name=account_name, account_num=account_num, withdrawal_amount=withdrawal_amount)
-        withdraw.save()
-        messages.success(request, 'Withdrawal Request Sent Successfully!!')
-        return redirect(reverse('products:farmer_dash'))
+        if withdrawal_amount >= farmer_profile.balance:
+            messages.error(request, 'Insufficient Balance!!')
+            return redirect(reverse('products:withdraw_page'))
+        else:
+            withdraw = withdrawalRequest.objects.create(farmer=request.user, bank_name=bank_name,   account_name=account_name, account_num=account_num, withdrawal_amount=withdrawal_amount)
+            withdraw.save()
+            farmer_profile.balance -= withdraw.withdrawal_amount
+            farmer_profile.save()
+
+            messages.success(request, 'Withdrawal Request Sent Successfully!!')
+            return redirect(reverse('products:farmer_dash'))
     else:
         pass
         

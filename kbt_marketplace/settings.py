@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from django.contrib.messages import constants as messages
 from pathlib import Path
 import os
+import braintree
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'products',
     'orders',
+    'payment',
     # 'django_extensions',
     # 'social_django',
     # 'django.contrib.postgres',
@@ -316,3 +318,15 @@ JAZZMIN_UI_TWEAKS = {
     "theme_switcher": False,
     "actions_sticky_top": True,
 }
+
+#braintree settings
+BRAINTREE_MERCHANT_ID = '9w8fr87vvkx6kbfr'
+BRAINTREE_PUBLIC_KEY = 'jqr2n3gs5pn8zygd'
+BRAINTREE_PRIVATE_KEY = '0f11f9d682afab4fd99e56874ba5adec'
+
+BRAINTREE_CONF = braintree.Configuration(
+    braintree.Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)
