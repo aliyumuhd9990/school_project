@@ -7,19 +7,19 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from .models import Order
 from django.urls import reverse
-
+from django.contrib.auth.decorators import login_required
 app_name = 'orders'
 
 # Create your views here.
-def approve_payment_view(request, order_id):
-    if request.user.is_superuser:  # Ensure only admins can approve
-        order = get_object_or_404(Order, id=order_id, status="Pending")
-        order.status = "Paid"
-        order.farmer.balance += order.amount  # Update farmer balance
-        order.farmer.save()
-        order.save()
-        return JsonResponse({"message": "Payment approved successfully", "new_balance": order.farmer.balance})
-    return JsonResponse({"error": "Unauthorized"}, status=403)
+# def approve_payment_view(request, order_id):
+#     if request.user.is_superuser:  # Ensure only admins can approve
+#         order = get_object_or_404(Order, id=order_id, status="Pending")
+#         order.status = "Paid"
+#         order.farmer.balance += order.amount  # Update farmer balance
+#         order.farmer.save()
+#         order.save()
+#         return JsonResponse({"message": "Payment approved successfully", "new_balance": order.farmer.balance})
+#     return JsonResponse({"error": "Unauthorized"}, status=403)
 
 def CreateOrderView(request):
     cart = Cart.objects.get(user=request.user)
@@ -76,4 +76,16 @@ def CreateOrderView(request):
         'total_price' : total_price,
     }
     return render(request, 'Orders/create.html', context)
+
+@login_required
+def OrderListView(request):
+    order = Order.objects.filter(email=request.user)
+    # order_item = OrderItem.objects.get()
+    
+
+    context = {
+        'order': order,
+        # 'order_item': order_item,
+    }
+    return render(request, 'Orders/order_list.html', context)
     

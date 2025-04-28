@@ -8,7 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>cart_page</title>
+    <title>Farmer-Profile</title>
 
     <!-- CSS FILES -->
     <link rel="preconnect" href="{% static 'https://fonts.googleapis.com '%}" />
@@ -57,7 +57,7 @@ https://www.tooplate.com/view/2127-little-fashion
           <div class="row">
             <div class="col-lg-10 col-12">
               <h1>
-                <span class="d-block text-dark">My Carts</span>
+                <span class="d-block text-dark">My Orders</span>
               </h1>
             </div>
           </div>
@@ -66,29 +66,17 @@ https://www.tooplate.com/view/2127-little-fashion
       {% include 'components/message.html' %}
       <div class="container">
 
-        {% if cart_items %}
-        {% for item in cart_items  %}
+        {% if order %}
+        {% for x in order  %}
         <div class="col-lg-6 col-12 my-5 d-block shadow mx-auto">
-          <div class="row d-flex">
-            <div class="col-6 mx-auto">
-              <img class="img rounded-5 " style="width: 100px; height: 100px;" src="{{item.crop.crop_img.url}}" alt="" />
-              <h3>{{item.crop.crop_name}}</h3>
-            </div>
-            <div class="col-6">
-              <p>Quantity: {{ item.quantity }}</p>
-              <p>Crop Price: &#8358;{{ item.crop.crop_price }}</p>
-              <p>Total Price: &#8358;{{ item.total_price }}</p>
-            </div>
-            <div class="d-grid gap-2 ">
-              <a href="{% url 'remove_from_cart' item.id %}" class="btn custom-btn cart-btn my-2">Remove Crop</a>
-            </div>
-          </div>
+          <ol>
+            <li>{{ x.crop.crop_name}} X {{ x.quantity }}</li>
+          </ol>
+          <p>Total: &#8358;{{ total_price }}</p>
         </div>
         {% endfor %}
-        <h1>Total: &#8358;{{ total_price }}</h1>
-        <a class="btn custom-btn cart-btn m-3" href="{% url 'orders:create_order' %}">Checkout</a>
         {% else %}
-        <p class="text-center text-dark m-5">Your Carts is Empty!!</p>
+        <p class="text-center text-dark m-5">Your Orders is Empty!!</p>
         {% endif %}
         
       </div>

@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from orders.models import *
 
 
 # from .authentications import authenticate
@@ -87,10 +88,12 @@ def AccountView(request):
      user = request.user
      profile = Profile.objects.get(user=user)
      address = Address.objects.get(user=user)
+    #  order = Order.objects.get()
      context = {
           'user' : user,
           'profile': profile,
-          'address' : address
+          'address' : address,
+        #   'order' : order,
      }
      return render(request, 'accounts/account.html', context)
 

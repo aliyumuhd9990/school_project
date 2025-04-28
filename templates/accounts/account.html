@@ -110,6 +110,15 @@
         </a>
       </ul>
 
+      <h6 class="text-dark my-3">Orders</h6>
+      <div class="d-grid gap-2">
+        <a href="{% url 'cart_view' %}" class="btn btn-white text-start border my-custom-btn">
+          Cart
+        </a>
+        <a href="{% url 'orders:order_list' %}" class="btn btn-white text-start border my-custom-btn">
+          Orders
+        </a>
+      </div>
       <h6 class="text-dark my-3">Settings</h6>
       <div class="d-grid gap-2">
         <a href="#" class="btn btn-white text-start border my-custom-btn">

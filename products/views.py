@@ -194,6 +194,8 @@ def withdrawView(request):
         withdrawal_amount = Decimal(withdrawal_amount)
         farmer_profile, created = FarmerProfile.objects.get_or_create(user=request.user)
 
+
+
         if withdrawal_amount >= farmer_profile.balance:
             messages.error(request, 'Insufficient Balance!!')
             return redirect(reverse('products:withdraw_page'))
@@ -218,7 +220,20 @@ def removeCrop(request, id):
 
 def historyView(request):
     history = withdrawalRequest.objects.filter(farmer=request.user)
+
+    paginator = Paginator(history, 5)
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        #if page is not an integer deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        #if page is out of range deliver last page of result
+        posts = paginator.page(paginator.num_pages)
+
     context = {
-        'history' : history,
+        'history' : posts,
+        'page': page,
     }
     return render(request, 'farmers_page/history.html', context)

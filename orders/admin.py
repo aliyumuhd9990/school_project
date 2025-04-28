@@ -16,7 +16,7 @@ def approve_payment(modeladmin, request, queryset):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'full_name', 'email', 'city', 'location', 'paid', 'created', 'updated']
+    list_display = ['email', 'full_name', 'city', 'location', 'paid', 'created', 'updated']
     actions = [approve_payment]
 
     list_filter = ['paid', 'created', 'updated']

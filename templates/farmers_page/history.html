@@ -8,7 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>KBT-Marketplace</title>
+    <title>history_page</title>
 
     <!-- CSS FILES -->
     <link rel="preconnect" href="{% static 'https://fonts.googleapis.com' %}" />
@@ -140,7 +140,7 @@ https://www.tooplate.com/view/2127-little-fashion
             </div>
 
             <div class="col-12 text-center">
-              <a href="products.html" class="view-all">View All Orders</a>
+              {% include 'components/pagination.html' with page=history %}
             </div>
           </div>
         </div>
