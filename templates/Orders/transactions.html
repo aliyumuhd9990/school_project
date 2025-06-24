@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>transaction_history</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="{% static 'https://fonts.googleapis.com '%}" />
+
+    <link
+      rel="preconnect"
+      href="{% static 'https://fonts.gstatic.com '%}"
+      crossorigin
+    />
+
+    <link
+      href="{% static 'https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap '%}"
+      rel="stylesheet"
+    />
+
+    <link href="{% static 'css/bootstrap.min.css '%}" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap-icons.css '%}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'css/slick.css '%}" />
+
+    <link
+      href="{% static 'css/tooplate-little-fashion.css '%}"
+      rel="stylesheet"
+    />
+    <!--
+
+Tooplate 2127 Little Fashion
+
+https://www.tooplate.com/view/2127-little-fashion
+
+-->
+  </head>
+
+  <body>
+    <section class="preloader">
+      <div class="spinner">
+        <span class="sk-inner-circle"></span>
+      </div>
+    </section>
+
+    <main>
+      <header
+        class="site-header mt-0 section-padding d-flex justify-content-center align-items-center"
+      >
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-12">
+              <h1>
+                <span class="d-block text-dark">Transaction History</span>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </header>
+      {% include 'components/message.html' %}
+      <section class="container products section-padding">
+      <div class="container">
+
+        {% if orders  %}
+        <div class="table table-responsive ">
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Payment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.created|date:"Y-m-d H:i" }}</td>
+                <td>
+                    {% if order.paid %}
+                        <span style="color:green;">Paid</span>
+                    {% elif order.braintree_id %}
+                        <span style="color:red;">Cancelled</span>
+                    {% else %}
+                        <span style="color:orange;">Pending</span>
+                    {% endif %}
+                </td>
+                <td>₦{{ total_price|floatformat:2 }}</td>
+                <td>
+                    <a href="{% url 'payment:process' %}" target="_blank">Checkout</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        </div>
+{% else %}
+    <p>You don't make any transaction yet.</p>
+{% endif %}
+        
+      </div>
+      </section>
+      {% comment %}
+        
+      
+      <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+        <button
+        type="submit"
+        class="btn custom-btn cart-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#cart-modal"
+        >
+        Add to Cart
+      </button>
+    </div>
+
+    <!-- CART MODAL -->
+    <div
+      class="modal fade"
+      id="cart-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0">
+          <div class="modal-header flex-column">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                <img
+                  src="{% if crop.crop_img %}{{crop.crop_img.url}}{% else %}{% static 'images/img1.jpg' %}{% endif %}"
+                  class="img-fluid product-image"
+                  alt=""
+                  style="width: 350px; height: 300px"
+                  />
+                </div>
+
+              <div class="col-lg-6 col-12 mt-3 mt-lg-0">
+                <h3 class="modal-title" id="exampleModalLabel">{{crop.crop_name}}</h3>
+
+                <p class="product-price text-muted mt-3">${{crop.crop_price}}</p>
+                
+                <p class="product-p">Quatity: <span class="ms-1"></span></p>
+
+                <p class="product-p">Colour: <span class="ms-1">Black</span></p>
+
+                <p class="product-p pb-3">
+                  Size: <span class="ms-1">S/S</span>
+                </p>
+
+                <div class="border-top mt-4 pt-3">
+                  <p class="product-p">
+                    <strong>Total: <span class="ms-1">$100</span></strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <div class="row w-50">
+              <button type="button" class="btn custom-btn cart-btn ms-lg-4">
+                Checkout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {% endcomment %}
+    <footer class="site-footer">
+      <div class="container">
+          <div class="row">
+
+              <div class="col-lg-3 col-10 me-auto mb-4">
+                  <h4 class="text-white mb-3"><a href="index.html">KBT</a> Marketplace</h4>
+                  <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2025 <strong>KBT-Marketplace</strong></p>
+                  <br>
+                  <p class="copyright-text">Designed by <a href="#" target="_blank">Aliyu Muhammad Musa</a></p>
+              </div>
+
+              <div class="col-lg-5 col-8">
+                  <h5 class="text-white mb-3">Sitemap</h5>
+
+                  <ul class="footer-menu d-flex flex-wrap">
+                      <li class="footer-menu-item"><a href="about.html" class="footer-menu-link">Story</a></li>
+
+                      <li class="footer-menu-item"><a href="#" class="footer-menu-link">Products</a></li>
+
+                      <li class="footer-menu-item"><a href="#" class="footer-menu-link">Privacy policy</a></li>
+
+                      <li class="footer-menu-item"><a href="#" class="footer-menu-link">FAQs</a></li>
+
+                      <li class="footer-menu-item"><a href="#" class="footer-menu-link">Contact</a></li>
+                  </ul>
+              </div>
+
+              <div class="col-lg-3 col-4">
+                  <h5 class="text-white mb-3">Social</h5>
+
+                  <ul class="social-icon">
+
+                      <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+
+                      <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+
+                      <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+                      <li><a href="#" class="social-icon-link bi-skype"></a></li>
+                  </ul>
+              </div>
+
+          </div>
+      </div>
+  </footer>
+
+<!-- JAVASCRIPT FILES -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/Headroom.js' %}"></script>
+<script src="{% static 'js/jQuery.headroom.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>

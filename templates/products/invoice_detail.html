@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}
+invoice_detail - {{ invoice.id}}
+{% endblock title %}
+{% block content %}
+
+<!-- templates/invoice_detail.html -->
+<h1>Invoice #{{ invoice.id }}</h1>
+<p><strong>Date:</strong> {{ invoice.date_created }}</p>
+<p><strong>Customer:</strong> {{ invoice.customer.name }} | ({{ invoice.customer.email }})</p>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Unit Price</th>
+        <th>Total</th>
+    </tr>
+    {% for item in invoice.items.all %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>₦{{ item.product.price }}</td>
+        <td>₦{{ item.total_price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Total: ₦{{ invoice.total_amount }}</h3>
+{% endblock content %}

@@ -11,9 +11,9 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-6 col-10">
-                                    <h1 class="slick-title">Cool Fashion</h1>
+                                    <h1 class="slick-title">KBT_Marketplace</h1>
                                     
-                                    <p class="lead text-white mt-lg-3 mb-lg-5">Little fashion template comes with total 8 HTML pages provided by Tooplate website.</p>
+                                    <p class="lead text-white mt-lg-3 mb-lg-5"></p>
                                     
                                     <a href="about.html" class="btn custom-btn">Learn more about us</a>
                                 </div>
@@ -29,11 +29,12 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-6 col-10">
-                                    <h1 class="slick-title">New Design</h1>
+                                    <h1 class="slick-title">New Crops</h1>
                                     
-                                    <p class="lead text-white mt-lg-3 mb-lg-5">Please share this Little Fashion template to your friends. Thank you for supporting us.</p>
+                                    <p class="lead text-white mt-lg-3 mb-lg-5">Looking for something fresh and different?
+Discover newly harvested and seasonal crops from local farmers in Kumbotso!</p>
                                     
-                                    <a href="product.html" class="btn custom-btn">Explore products</a>
+                                    <a href="{% url 'products:products-list' %}" class="btn custom-btn">Explore products</a>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +50,7 @@
                                 <div class="col-lg-6 col-10">
                                     <h1 class="slick-title">Talk to us</h1>
                                     
-                                    <p class="lead text-white mt-lg-3 mb-lg-5">Tooplate is one of the best HTML CSS template websites for everyone.</p>
+                                    <p class="lead text-white mt-lg-3 mb-lg-5">RandoTech is one of the best,.</p>
                                     
                                     <a href="contact.html" class="btn custom-btn">Work with us</a>
                                 </div>
@@ -99,7 +100,7 @@
             </div>
             {% endfor %}
             {% else %}
-            <section class="about section-padding">
+            <section class="about section-padding" id="about">
                 <div class="container">
                     <div class="row">
                         
@@ -164,7 +165,7 @@
                                         
                                         <div class="col-lg-5 col-12">
                                             <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
-                                                <h4 class="mb-3">Life at Studio</h4>
+                                                <h4 class="mb-3">Life at KBT-Marketplace</h4>
                                                 
                                                 <p>KBT-Marketplace is a digital platform designed to facilitate the buying and selling of agricultural products in Kumbotso LGA, Kano State. The platform operates by connecting three key actors: users, farmers, and administrators, each playing a vital role in ensuring smooth transactions and marketplace efficiency.
 
@@ -199,19 +200,19 @@
                                                 
                                                 <div class="skill-thumb mt-3">
                                                     
-                                                    <strong>Branding</strong>
+                                                    <strong>Crops</strong>
                                                     <span class="float-end">90%</span>
                                                     <div class="progress">
                                                         <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
                                                             </div>
                                                             
-                                                    <strong>Design & Stragety</strong>
+                                                    <strong>Farmers</strong>
                                                     <span class="float-end">70%</span>
                                                             <div class="progress">
                                                                 <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
                                                             </div>
 
-                                                            <strong>Online Platform</strong>
+                                                            <strong>Buyers</strong>
                                                             <span class="float-end">80%</span>
                                                             <div class="progress">
                                                                 <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
@@ -220,7 +221,7 @@
                                                         </div>
                                                         
                                                         <div class="mt-2 mt-lg-auto">
-                                                            <a href="products.html" class="custom-link mb-2">
+                                                            <a href="{% url 'products:products-list' %}" class="custom-link mb-2">
                                                         Explore products
                                                         <i class="bi-arrow-right ms-2"></i>
                                                     </a>
@@ -248,11 +249,17 @@
                         <div class="col-lg-6 col-12">
                             <div class="px-5 py-5 py-lg-0">
                                 
-                                <h2 class="mb-4"><span>Retail</span> shop owners</h2>
+                                <h2 class="mb-4"><span>Shop</span> owners</h2>
                                 
-                                <p class="lead mb-4">Credits go to Unsplash and FreePik websites for images used in this Little Fashion by Tooplate.</p>
+                                <p class="lead mb-4">At KBT_Marketplace, we connect you directly with passionate farmer shop owners who grow and sell their own agricultural produce. Each shop is managed by a verified local farmer, ensuring that every product you see is farm-fresh, naturally grown, and honestly priced.
+
+🌽 From maize, millet, and tomatoes to eggs, vegetables, and fruits – our farmer shops offer a wide range of seasonal produce you can trust.
+
+🛒 Browse shops, add items to your cart, and support local farmers with every purchase.
+
+By shopping here, you’re not just buying food — you're investing in our local farming community.</p>
                                 
-                                <a href="products.html" class="custom-link">
+                                <a href="{% url 'products:products-list' %}" class="custom-link">
                                     Explore Products
                                     <i class="bi-arrow-right ms-2"></i>
                                 </a>
@@ -263,7 +270,7 @@
                 </div>
             </section>
 
-            <section class="featured-product section-padding">
+            <section class="featured-product section-padding" id="product">
                 <div class="container">
                     <div class="row">
                         
@@ -292,7 +299,7 @@
                 <p class="product-p">{{c.crop_desc}}</p>
             </div>
             
-            <small class="product-price text-muted ms-auto mt-auto mb-5">${{c.crop_price}}</small>
+            <small class="product-price text-muted ms-auto mt-auto mb-5">&#8358;{{c.crop_price}}</small>
         </div>
     </div>
 </div>
@@ -301,7 +308,54 @@
                        
 {% endif %}
                         <div class="col-12 text-center">
-                            <a href="" class="view-all">View All Products</a>
+                            <a href="{% url 'products:products-list' %}" class="view-all">View All Products</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+            <section id="contact" class="front-product">
+                <div class="container">
+                    <div class="container p-5">
+
+                        <div class="col-lg-6 col-12">
+                            <div class="">
+                                
+                                <h2 class="mb-4"><span>Contact</span> Us</h2>
+                                <form role="form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-floating">
+                        <input
+                          type="email"
+                          name="email"
+                          id="email"
+                          class="form-control"
+                          placeholder="Email"
+                          required
+                        />
+  
+                        <label for="contact">Email</label>
+                      </div>
+                      <br />
+                    
+                    <div class="form-floating">
+                      <textarea rows="10" cols="68" name="desc" id="desc"></textarea>
+
+                      <label for="desc">Description</label>
+                    </div>
+                    <br />
+                   
+
+                    <button
+                      type="submit"
+                      class="btn custom-btn form-control mt-4 mb-3"
+                    >
+                      Submit
+                    </button>
+
+                  </form>
+                                
+                            </div>
                         </div>
                         
                     </div>

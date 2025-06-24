@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Invoice {{ order.id }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1, h2, h3 { margin: 0; padding: 5px 0; }
+        .status { font-weight: bold; }
+        .paid { color: green; }
+        .cancelled { color: red; }
+        .pending { color: orange; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        .total { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Invoice</h1>
+    <p><strong>Order ID:</strong> {{ order.id }}</p>
+    <p><strong>Full Name:</strong> {{ order.full_name }}</p>
+    <p><strong>Email:</strong> {{ order.email }}</p>
+    <p><strong>City:</strong> {{ order.city }}</p>
+    <p><strong>Location:</strong> {{ order.location }}</p>
+    <p><strong>Date:</strong> {{ order.created|date:"Y-m-d H:i" }}</p>
+    <p><strong>Status:</strong>
+        <span class="status {% if status == 'Paid' %}paid{% elif status == 'Cancelled' %}cancelled{% else %}pending{% endif %}">
+            {{ status }}
+        </span>
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Crop</th>
+                <th>Quantity</th>
+                <th>Price (₦)</th>
+                <th>Total (₦)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+            <tr>
+                <td>{{ item.crop.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price|floatformat:2 }}</td>
+                <td>{{ item.price|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3" class="total">Grand Total</td>
+                <td class="total">₦{{ order.get_total_cost|floatformat:2 }}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

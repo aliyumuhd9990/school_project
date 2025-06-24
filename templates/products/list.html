@@ -74,24 +74,25 @@ https://www.tooplate.com/view/2127-little-fashion
             </div>
           </div>
         </header>
-  <div class="container">
-    <div class="row">
-     
-      <ul class= "d-flex">
-        <li class="{% if not category %}slc{% endif %}" >
-          <a href="{% url 'products:products-list' %}">All</a>
-        </li>
         
-        {% for c in categories %} 
-        <li class=" {% if category.slug == c.slug %}slc{% endif %}"
-        >
-        <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-        </li>
-
-        {% endfor %}
-      </ul>
-
-      <h2>{% if category %}{{category.name}}{% else %}Products{% endif %}</h2>
+        <div class="container">
+          <div class="row">
+            
+            <ul class= "d-flex">
+              <li class="{% if not category %}slc{% endif %}" >
+                <a href="{% url 'products:products-list' %}">All</a>
+              </li>
+              
+              {% for c in categories %} 
+              <li class=" {% if category.slug == c.slug %}slc{% endif %}"
+              >
+              <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+            </li>
+            
+            {% endfor %}
+          </ul>
+          
+          <h2>{% if category %}{{category.name}}{% else %}Products{% endif %}</h2>
       {% for c in crop %}
       <div class="col-lg-4 col-6 mb-3">
         <div class="product-thumb">
@@ -101,33 +102,34 @@ https://www.tooplate.com/view/2127-little-fashion
               class="img-fluid product-image"
               style="width: 300px; height: 200px"
               alt=""
-            />
-          </a>
+              />
+            </a>
 
-          <div class="product-top d-flex">
-            <span class="product-alert me-auto">New Arrival</span>
-
-            <a href="#" class="bi-heart-fill product-icon"></a>
-          </div>
-
-          <div class="product-info d-flex">
-            <div>
-              <h5 class="product-title mb-0">
-                <a href="{{ c.get_absolute_url}}" class="product-title-link"
-                  >{{c.crop_name}}</a
-                >
-              </h5>
-
-              <p class="product-p">{{c.crop_desc}}</p>
+            <div class="product-top d-flex">
+              <span class="product-alert me-auto">New Arrival</span>
+              
+              <a href="#" class="bi-heart-fill product-icon"></a>
             </div>
-
-            <small class="product-price text-muted ms-auto mt-auto mb-5"
+            
+            <div class="product-info d-flex">
+              <div>
+                <h5 class="product-title mb-0">
+                  <a href="{{ c.get_absolute_url}}" class="product-title-link"
+                  >{{c.crop_name}}</a
+                  >
+                </h5>
+                
+                <p class="product-p">{{c.crop_desc}}</p>
+              </div>
+              
+              <small class="product-price text-muted ms-auto mt-auto mb-5"
               >&#8358;{{c.crop_price}}</small
-            >
+              >
+            </div>
           </div>
         </div>
-      </div>
-      {% endfor %} 
+        {% endfor %} 
+        {% include 'components/pagination.html' with page=crop %}
     </div>
   </div>
 </section>

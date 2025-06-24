@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="en">
     {% load static %}
+    {% load socialaccount %}
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,10 +47,18 @@ https://www.tooplate.com/view/2127-little-fashion
 <div>     
         <main>
 
+
             <section class="sign-in-form section-padding">
                 <div class="container">
                     <div class="row">
+                        {% if request.GET.command == 'verification' %}
+                        <div class="container mx-auto alert alert-info text-center">
+                            Thank you for registaring with us, we have sent you an email verification to your email address! <b>{{request.GET.email}}</b>
+                            <br><br>
+                            Already Verified? <a href="{% url 'login' %}">Login</a>
+                        </div>
                         
+                        {% else %}
                         <div class="col-lg-8 mx-auto col-12">
                             <div class="container mx-auto gap-2  btn-group" role="group">
                                 <a href="#" class="btn btn-dark">User</a>
@@ -85,16 +94,16 @@ https://www.tooplate.com/view/2127-little-fashion
 
                                         <div class="social-login d-flex flex-column w-50 m-auto">
                                 
-                                            <a href="#" class="btn custom-btn social-btn mb-4">
+                                            <a href="" class="btn custom-btn social-btn mb-4">
                                                 <i class="bi bi-google me-3"></i>
             
-                                                Continue with Google
+                                                Google
                                             </a>
             
-                                            <a href="#" class="btn custom-btn social-btn">
+                                            <a href="" class="btn custom-btn social-btn">
                                                 <i class="bi bi-facebook me-3"></i>
             
-                                                Continue with Facebook
+                                                Facebook
                                             </a>
                                         </div>
 
@@ -104,7 +113,7 @@ https://www.tooplate.com/view/2127-little-fashion
                             </div>
                             
                         </div>
-
+                        {% endif %}
                     </div>
                 </div>
             </section>

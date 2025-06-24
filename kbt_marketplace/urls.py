@@ -4,13 +4,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('kbt_marketplace_administration/', admin.site.urls),
+    path('auth/', include('allauth.urls')),  # allauth URLs
     path('accounts/', include('accounts.urls')),
     path('cart/', include('carts.urls')),
     path('order/', include('orders.urls', namespace='orders')),
     path('', include('products.urls', namespace='products')),
-    path('payment/', include('payment.urls', namespace='payment')),
-    # path('social-auth/', include('social_django.urls', namespace='social')),
+    path('payment/', include(('payment.urls','payment'), namespace='payment')),
 ]
 
 if settings.DEBUG:

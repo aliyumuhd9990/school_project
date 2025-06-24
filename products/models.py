@@ -39,7 +39,7 @@ class Crop(models.Model):
         return self.crop_name
     
     def get_absolute_url(self):
-        return reverse('products:products-detail', args=[self.id, self.slug])
+        return reverse('products:products-detail', args=[self.id])
         # return reverse('product-detail', kwargs={'category_name': self.category})
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -62,3 +62,18 @@ class withdrawalRequest(models.Model):
 
     def __str__(self):
         return self.bank_name
+    
+class Invoice(models.Model):
+    customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def total_amount(self):
+        return sum(item.total_price() for item in self.items.all())
+
+class InvoiceItem(models.Model):
+    invoice = models.ForeignKey(Invoice, related_name='items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Crop, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+
+    def total_price(self):
+        return self.product.price * self.quantity

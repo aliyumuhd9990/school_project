@@ -1,6 +1,174 @@
-{% extends "base.html" %}
-{% block title %}Payment successful{% endblock %}
-{% block content %}
-  <h1>Your payment was successful</h1>
-  <p>Your payment has been processed successfully.</p>
-{% endblock %}
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Payment Success</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="{% static 'https://fonts.googleapis.com' %}" />
+
+    <link
+      rel="preconnect"
+      href="{% static 'https://fonts.gstatic.com' %}"
+      crossorigin
+    />
+
+    <link
+      href="{% static 'https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap' %}"
+      rel="stylesheet"
+    />
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/bootstrap-icons.css' %}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}" />
+
+    <link
+      href="{% static 'css/tooplate-little-fashion.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/fontawesome.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/brands.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/solid.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!--
+
+Tooplate 2127 Little Fashion
+
+https://www.tooplate.com/view/2127-little-fashion
+
+-->
+  </head>
+  <body>
+    <style>
+      ul {
+        list-style: none;
+      }
+      ul li {
+        margin-left: 15px;
+      }
+
+      ul li a:hover {
+        text-decoration: underline;
+      }
+
+      .slc {
+        color: #ff4400;
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: underline;
+        background-color: 3px 3px #ff4400;
+      }
+    </style>
+    <header
+      class="site-header mt-0 section-padding d-flex justify-content-center align-items-center"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-12">
+            <h1>
+              <h1 class="hero-title text-center mb-5">Payment Success</h1>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </header>
+                <section class="featured-product section-padding mt-5">
+                <div class="container p-5">
+                    <div class="row">
+                        <div class="container mx-auto alert alert-success text-center">
+                            Your payment has been processed successfully.
+                            <br>
+                            <a href="{% url 'orders:order_history' %}">Check Orders</a>
+                        </div>
+                    </div>
+                </div>
+          </section>
+  <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-10 me-auto mb-4">
+            <h4 class="text-white mb-3">
+              <a href="index.html">KBT</a>-Marketplace
+            </h4>
+            <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">
+              Copyright © 2025 <strong>KBT-Marketplace</strong>
+            </p>
+            <br />
+            <p class="copyright-text">
+              Designed by <a href="#" target="_blank">Aliyu Muhammad Musa</a>
+            </p>
+          </div>
+
+          <div class="col-lg-5 col-8">
+            <h5 class="text-white mb-3">Sitemap</h5>
+
+            <ul class="footer-menu d-flex flex-wrap">
+              <li class="footer-menu-item">
+                <a href="about.html" class="footer-menu-link">Story</a>
+              </li>
+
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">Products</a>
+              </li>
+
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">Privacy policy</a>
+              </li>
+
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">FAQs</a>
+              </li>
+
+              <li class="footer-menu-item">
+                <a href="#" class="footer-menu-link">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-4">
+            <h5 class="text-white mb-3">Social</h5>
+
+            <ul class="social-icon">
+              <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+
+              <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+
+              <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+              <li><a href="#" class="social-icon-link bi-skype"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'js/Headroom.js' %}"></script>
+      <script src="{% static 'js/jQuery.headroom.js' %}"></script>
+      <script src="{% static 'js/slick.min.js' %}"></script>
+      <script src="{% static 'js/custom.js' %}"></script>
+      <script src="{% static 'js/custom.js' %}"></script>
+  </body>
+</html>
+  

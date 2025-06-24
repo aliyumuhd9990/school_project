@@ -8,7 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Farmer-Profile</title>
+    <title>order_history</title>
 
     <!-- CSS FILES -->
     <link rel="preconnect" href="{% static 'https://fonts.googleapis.com '%}" />
@@ -64,23 +64,52 @@ https://www.tooplate.com/view/2127-little-fashion
         </div>
       </header>
       {% include 'components/message.html' %}
+      <section class="container products section-padding">
       <div class="container">
 
-        {% if order %}
-        {% for x in order  %}
-        <div class="col-lg-6 col-12 my-5 d-block shadow mx-auto">
-          <ol>
-            <li>{{ x.crop.crop_name}} X {{ x.quantity }}</li>
-          </ol>
-          <p>Total: &#8358;{{ total_price }}</p>
+        {% if orders  %}
+        <div class="table table-responsive ">
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Invoice</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>#{{ order.id }}</td>
+                <td>{{ order.created|date:"Y-m-d H:i" }}</td>
+                <td>
+                    {% if order.paid == True %}
+                        <span style="color:green;">Paid</span>
+                    {% else %}
+                        <span style="color:orange;">Pending</span>
+                    {% endif %}
+                </td>
+
+                <td> ₦{{ order.price }}</td>                
+                <td>
+                    <a href="{% url 'orders:generate_invoice' order.id %}" target="_blank">Download PDF</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% include 'components/pagination.html' with page=orders %}
         </div>
-        {% endfor %}
-        {% else %}
-        <p class="text-center text-dark m-5">Your Orders is Empty!!</p>
-        {% endif %}
+{% else %}
+    <p>You have no past orders.</p>
+{% endif %}
         
       </div>
-      
+      </section>
       {% comment %}
         
       

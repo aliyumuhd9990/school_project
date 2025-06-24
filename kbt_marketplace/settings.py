@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from django.contrib.messages import constants as messages
 from pathlib import Path
 import os
-import braintree
+from django.urls import reverse_lazy
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-p=*hy82wls_^*4$4hli24^6p8$#d+(6ou^id_np&x#l^cwpvq=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -34,21 +34,33 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'jazzmin',
     'django.contrib.admin',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # Social providers
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
+    'accounts.apps.AccountsConfig',
     'carts',
     'fontawesomefree',
     'products',
     'orders',
-    'payment',
+    'payment.apps.PaymentConfig',
+    'django.contrib.sites',
+
+    
     # 'django_extensions',
     # 'social_django',
     # 'django.contrib.postgres',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,8 +68,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'kbt_marketplace.urls'
@@ -97,6 +111,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'KBT_Marketplace_DB',
+        # 'USER' : 'postgres',
+        # 'PASSWORD' : '123456',
+        # 'HOST' : 'localhost',
+        # 'PORT' : '5432'
     }
 }
 
@@ -120,13 +140,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# AUTHENTICATION_BACKENDS = [
-#     'social_core.backends.facebook.FacebookOAuth2',
-#     'social_core.backends.twitter.TwitterOAuth',
-#     'social_core.backends.google.GoogleOAuth2',
-# ]
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 
 # CELERY_RESULT_BACKEND = "redis://localhost:6379/0"  
 
@@ -146,12 +166,21 @@ USE_I18N = True
 
 USE_TZ = True
 
+#Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'randotech05@gmail.com'
+EMAIL_HOST_PASSWORD = 'vmnu ixdw avsj mkyx'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR/ 'static']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # MEDIA_URL = '/images/'
 
 # Default primary key field type
@@ -159,6 +188,27 @@ STATICFILES_DIRS = [BASE_DIR/ 'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#social authentication settings
+LOGIN_REDIRECT_URL = reverse_lazy('products:index')
+ACCOUNT_SIGNUP_REDIRECT_URL = reverse_lazy('products:index')
+# ACCOUNT_LOGOUT_REDIRECT_URL = 'login'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_LOGIN_METHODS = {'email'}
+# ACCOUNT_SIGNUP_FIELDS = ['email', 'password1', 'password2', 'full_name', 'role']
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google' : {
+    'SCOPE': ['profile', 'email'],
+    'AUTH_PARAMS': {'access_type' : 'online'},
+    'OAUTH_PKCE_ENABLED' : True,
+    }
+    
+    
+    }
 #cart sesssion
 # CART_SESSION_ID = 'carts'
 
@@ -320,13 +370,18 @@ JAZZMIN_UI_TWEAKS = {
 }
 
 #braintree settings
-BRAINTREE_MERCHANT_ID = '9w8fr87vvkx6kbfr'
-BRAINTREE_PUBLIC_KEY = 'jqr2n3gs5pn8zygd'
-BRAINTREE_PRIVATE_KEY = '0f11f9d682afab4fd99e56874ba5adec'
+# BRAINTREE_MERCHANT_ID = '9w8fr87vvkx6kbfr'
+# BRAINTREE_PUBLIC_KEY = 'jqr2n3gs5pn8zygd'
+# BRAINTREE_PRIVATE_KEY = '0f11f9d682afab4fd99e56874ba5adec'
 
-BRAINTREE_CONF = braintree.Configuration(
-    braintree.Environment.Sandbox,
-    BRAINTREE_MERCHANT_ID,
-    BRAINTREE_PUBLIC_KEY,
-    BRAINTREE_PRIVATE_KEY
-)
+# import braintree
+# BRAINTREE_CONF = braintree.Configuration(
+#     braintree.Environment.Sandbox,
+#     BRAINTREE_MERCHANT_ID,
+#     BRAINTREE_PUBLIC_KEY,
+#     BRAINTREE_PRIVATE_KEY
+# )
+
+PAYSTACK_PUBLIC_KEY = 'pk_test_3d5276112cc71d445e68e4a4c415b8832565ae1e'
+PAYSTACK_SECRET_KEY = 'sk_test_18f3c41d700d6a0821c1f554715b805e9a92ebfc'
+

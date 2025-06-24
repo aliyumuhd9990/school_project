@@ -65,10 +65,11 @@ https://www.tooplate.com/view/2127-little-fashion
         <div class="container">
           <div class="row">
             <div class="col-lg-8 mx-auto col-12">
-
+ {% include 'components/message.html' %}
               <div class="row">
                 <div class="col-lg-8 col-11 mx-auto">
-                  <form role="form" method="post">
+                  <form role="form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="form-floating">
                         <input
                           type="text"
@@ -98,8 +99,8 @@ https://www.tooplate.com/view/2127-little-fashion
                     
                     <div class="form-floating">
                       <textarea 
-                      name="desc"
-                      id="desc"
+                      name="cdesc"
+                      id="cdesc"
                       class="form-control"
                       rows="30"
                       required>{{crop.crop_desc}}</textarea>
@@ -114,28 +115,28 @@ https://www.tooplate.com/view/2127-little-fashion
                         >
                     <div class="">
                       <input
-                        type="file"
-                        name="cimg"
-                        id="file"
-                        class="form-control"
-                        value="{{crop.crop_img}}"
-                        required
+                      type="file"
+                      name="cimg"
+                      id="file"
+                      class="form-control"
+                      required
                       />
+                    
                     <br />
-                    <label class="form-label" for="role"
-                          ><b>Category:</b></label
-                        >
-                        <select
+                    <div class="form-floating">
+                        <input
+                          type="text"
                           name="cat"
                           id="cat"
                           class="form-control"
-                          required
-                        >
-                      <option value="food"></option>
-                      <option value="fiber">Fiber Crops</option>
-                    </select><br>
+                          value="{{crop.category.name}}"
+                        />
+  
+                        <label for="contact">Category</label>
+                      </div>
+                      <br />
                     <label for="available">Available</label>
-                    <input type="checkbox" name="available" id="available" checked>
+                    <input type="checkbox" name="available" id="available" {% if crop.available %}checked{% endif %}>
 
                    
 
