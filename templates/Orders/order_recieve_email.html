@@ -4,8 +4,9 @@
                 
             YOUR ORDER HAS BEEN RECIEVED
 
-            Order Number: {{order.id}}
-            follow the link below to checkout.
+            Order Number: #00{{order.id}}39
+            follow the link below to Checkout
+            http://127.0.0.1:8000/{% url 'payment:initialize_payment' order.id %}
             
-            
+            Note: If you already paid for it, ignore this email.
 {% endautoescape %}

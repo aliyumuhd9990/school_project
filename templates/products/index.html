@@ -1,65 +1,100 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    
+ <style>
+    .carousel-item img {
+      height: 500px;
+      object-fit: cover;
+    }
 
-<section class="slick-slideshow">   
-    <div class="slick-custom">
-                    <img src="{% static 'images/slideshow/sl1.jpeg' %}" class="img-fluid" alt="">
+    .carousel-caption {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 1rem;
+      border-radius: 10px;
+    }
+  </style>
+<br>
+<section class="front-product">
+<div class="container mt-5">
+  <h2 class="text-center mb-2">Explore Crop Categories</h2>
 
-                    <div class="slick-bottom">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 col-10">
-                                    <h1 class="slick-title">KBT_Marketplace</h1>
-                                    
-                                    <p class="lead text-white mt-lg-3 mb-lg-5"></p>
-                                    
-                                    <a href="about.html" class="btn custom-btn">Learn more about us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div id="cropCategoriesCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
 
-                <div class="slick-custom">
-                    <img src="{% static 'images/slideshow/sl2.jpeg' %}" class="img-fluid" alt="">
-                    
-                    <div class="slick-bottom">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 col-10">
-                                    <h1 class="slick-title">New Crops</h1>
-                                    
-                                    <p class="lead text-white mt-lg-3 mb-lg-5">Looking for something fresh and different?
-Discover newly harvested and seasonal crops from local farmers in Kumbotso!</p>
-                                    
-                                    <a href="{% url 'products:products-list' %}" class="btn custom-btn">Explore products</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <!-- Foods -->
+      <div class="carousel-item active">
+        <img src="{% static 'images/food.jpg' %}" class="d-block w-100" alt="Foods">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="text-white">Food</h5>
+          <p class="text-white">Maize, Rice, Millet, Sorghum, Wheat.</p>
+          {% with categories.1 as first_category %}
+          <a class="btn btn-success" href="{% url 'products:products-list-by-category' first_category.slug %}">show</a>
+          {% endwith %}
+        </div>
+      </div>
 
-                <div class="slick-custom">
-                    <img src="{% static 'images/slideshow/sl3.jpeg' %}" class="img-fluid" alt="">
-                    
-                    <div class="slick-bottom">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 col-10">
-                                    <h1 class="slick-title">Talk to us</h1>
-                                    
-                                    <p class="lead text-white mt-lg-3 mb-lg-5">RandoTech is one of the best,.</p>
-                                    
-                                    <a href="contact.html" class="btn custom-btn">Work with us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <!-- Vegetables -->
+      <div class="carousel-item">
+        <img src="{% static 'images/vegitables.jpg' %}" class="d-block w-100" alt="Vegetables">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="text-white">Vegetables</h5>
+          <p class="text-white">Tomatoes, Lettuce, Spinach, Peppers, and more.</p>
+          {% with categories.4 as fouth_category %}
+          <a class="btn btn-success" href="{% url 'products:products-list-by-category' fouth_category.slug %}">show</a>
+          {% endwith %}
+        </div>
+      </div>
 
-            </section>
+      <!-- Fruits -->
+      <div class="carousel-item">
+        <img src="{% static 'images/fruits.jpg' %}" class="d-block w-100" alt="Fruits">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="text-white">Fruits</h5>
+          <p class="text-white">Mangoes, Bananas, Oranges, Apples, and more.</p>
+          {% with categories.2 as second_category %}
+          <a class="btn btn-success" href="{% url 'products:products-list-by-category' second_category.slug %}">show</a>
+          {% endwith %}
+        </div>
+        
+      </div>
+
+      <!-- Fiber Crops -->
+      <div class="carousel-item">
+        <img src="{% static 'images/fiber.jpg' %}" class="d-block w-100" alt="Fiber Crops">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="text-white">Fiber Crops</h5>
+          <p class="text-white">Cotton, Jute, Hemp and other industrial crops.</p>
+          {% with categories.0 as zero_category %}
+          <a class="btn btn-success" href="{% url 'products:products-list-by-category' zero_category.slug %}">show</a>
+          {% endwith %}
+        </div>
+      </div>
+
+      <!-- Oil Crops -->
+      <div class="carousel-item">
+        <img src="{% static 'images/oil.jpg' %}" class="d-block w-100" alt="Oil Crops">
+        <div class="carousel-caption d-none d-md-block">
+          <h5 class="text-white">Oil Crops</h5>
+          <p class="text-white">Groundnuts, Soybeans, Sesame, Palm fruits.</p>
+          {% with categories.3 as third_category %}
+          <a class="btn btn-success" href="{% url 'products:products-list-by-category' third_category.slug %}">show</a>
+          {% endwith %}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#cropCategoriesCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#cropCategoriesCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</div>
+<br><br>
+</section>
             <section class="featured-product section-padding">
     {% if request.user.is_authenticated %}
     <div class="container">

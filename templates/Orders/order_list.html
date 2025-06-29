@@ -96,7 +96,12 @@ https://www.tooplate.com/view/2127-little-fashion
 
                 <td> ₦{{ order.price }}</td>                
                 <td>
-                    <a href="{% url 'orders:generate_invoice' order.id %}" target="_blank">Download PDF</a>
+                  {% if order.paid == True %}
+                  <a href="{% url 'orders:generate_invoice' order.id %}" target="_blank">Download PDF</a>
+        
+                  {% else %}
+                  <a href="{% url 'payment:initialize_payment' order.id %}">Checkout</a>
+                {% endif %}
                 </td>
             </tr>
             {% endfor %}

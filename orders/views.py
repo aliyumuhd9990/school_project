@@ -22,16 +22,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 app_name = 'orders'
 
 # Create your views here.
-# def approve_payment_view(request, order_id):
-#     if request.user.is_superuser:  # Ensure only admins can approve
-#         order = get_object_or_404(Order, id=order_id, status="Pending")
-#         order.status = "Paid"
-#         order.farmer.balance += order.amount  # Update farmer balance
-#         order.farmer.save()
-#         order.save()
-#         return JsonResponse({"message": "Payment approved successfully", "new_balance": order.farmer.balance})
-#     return JsonResponse({"error": "Unauthorized"}, status=403)
 
+
+@login_required
 def CreateOrderView(request):
     cart = Cart.objects.get(user=request.user)
     cart_items = cart.cart_items.all()
@@ -60,8 +53,7 @@ def CreateOrderView(request):
             location = location,
             user = request.user,
         )
-        print("Created Order:", order.id)
-        
+      
 
         for item in cart_items:
             OrderItem.objects.create(
@@ -72,7 +64,10 @@ def CreateOrderView(request):
                 )
         
         if contact == "080xxxxxx":
-            messages.error(request, 'Update Your Account')
+            messages.error(request, 'Update Your Contact')
+            return redirect(reverse('orders:create_order'))
+        elif location == "No.123, bus stop, Kano State.":
+            messages.error(request, 'Update Your Location')
             return redirect(reverse('orders:create_order'))
         else:
             cart.cart_items.all().delete()
@@ -89,12 +84,11 @@ def CreateOrderView(request):
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
             return redirect('payment:initialize_payment', order_id=order.id)
-            # return redirect('payment:initialize_payment', order_id=order.id)
-            # order_id = 123  # Example order ID
-            # task = order_created.delay(order_id)
-            # return JsonResponse({"task_id": task.id, "message": "Order processing started!"})
+           
     else:
         form = OrderCreateForm()
+        
+        
     context = {
         'cart': cart,
         'cart_items' : cart_items,

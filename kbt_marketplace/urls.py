@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('kbt_marketplace_administration/', admin.site.urls),
-    path('auth/', include('allauth.urls')),  # allauth URLs
+    # path('auth/', include('allauth.urls')),  # allauth URLs
     path('accounts/', include('accounts.urls')),
     path('cart/', include('carts.urls')),
     path('order/', include('orders.urls', namespace='orders')),

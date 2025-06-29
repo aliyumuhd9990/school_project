@@ -22,6 +22,7 @@
 
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
     <link href="{% static 'css/bootstrap-icons.css' %}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'css/slick.css' %}" />
 
@@ -36,6 +37,59 @@ Tooplate 2127 Little Fashion
 https://www.tooplate.com/view/2127-little-fashion
 
 -->
+<style>
+/* Dropdown container */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Button or link to open the dropdown */
+.dropdown-toggle {
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 10px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 4px;
+}
+
+/* Links inside dropdown */
+.dropdown-content a {
+  color: #333;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Hover effect */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown when hovering over the container */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Optional: Highlight the dropdown button on hover */
+.dropdown:hover .dropdown-toggle {
+  background-color: #e2e6ea;
+}
+</style>
   </head>
 
   <body>
@@ -69,9 +123,20 @@ https://www.tooplate.com/view/2127-little-fashion
       {% if request.user.is_authenticated %}
       
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <!-- Insert into your navbar -->
+        <li class="nav-item dropdown">
+          <div class="dropdown">
+            <span class="dropdown-toggle">Categories</span>
+            <div class="dropdown-content">
+              {% for c in categories %}
+              <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+              {% endfor %}
+          </div>
+        </div>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Crops</a>
+          <a class="nav-link" aria-current="page" href="#">Crops</a>
         </li>
+      </li>
         <li class="nav-item">
           <a class="nav-link " aria-current="page" href="{% url 'orders:order_history' %}">Orders</a>
         </li>
@@ -84,12 +149,21 @@ https://www.tooplate.com/view/2127-little-fashion
       </ul>
       {% else %}
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#home">Home</a>
+        <!-- Insert into your navbar -->
+        <li class="nav-item dropdown">
+          <div class="dropdown">
+            <span class="dropdown-toggle">Categories</span>
+            <div class="dropdown-content">
+              {% for c in categories %}
+              <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
         </li>
         <li class="nav-item">
           <a class="nav-link " aria-current="page" href="#about">About</a>
         </li>
+        
         <li class="nav-item">
           <a class="nav-link " aria-current="page" href="#product">Crops</a>
         </li>
@@ -169,7 +243,13 @@ https://www.tooplate.com/view/2127-little-fashion
     </footer>
 
 <!-- JAVASCRIPT FILES -->
+ 
 <script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Bootstrap JS (ensure this matches your Bootstrap version) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/Headroom.js' %}"></script>
 <script src="{% static 'js/jQuery.headroom.js' %}"></script>

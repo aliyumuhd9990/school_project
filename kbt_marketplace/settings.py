@@ -112,7 +112,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
         # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'KBT_Marketplace_DB',
+        # 'NAME': 'postgres',
         # 'USER' : 'postgres',
         # 'PASSWORD' : '123456',
         # 'HOST' : 'localhost',
@@ -171,8 +171,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'randotech05@gmail.com'
-EMAIL_HOST_PASSWORD = 'vmnu ixdw avsj mkyx'
+EMAIL_HOST_USER = 'aliyumuhammad9990@gmail.com'
+EMAIL_HOST_PASSWORD = 'vvso dawf ckmv tsnn'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -188,7 +188,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#social authentication settings
+# social authentication settings
 LOGIN_REDIRECT_URL = reverse_lazy('products:index')
 ACCOUNT_SIGNUP_REDIRECT_URL = reverse_lazy('products:index')
 # ACCOUNT_LOGOUT_REDIRECT_URL = 'login'

@@ -16,7 +16,15 @@ app_name = 'products'
 
 def IndexView(request):
     crop = Crop.objects.all().order_by('crop_name')[:6]
-    return render(request, 'products/index.html', {'crop': crop})
+    categories = Category.objects.all()
+    crops = Crop.objects.filter(available = True)
+    
+        
+    context = {
+        'crop': crop,
+        'categories': categories,
+    }
+    return render(request, 'products/index.html', context)
 
 @login_required
 def FarmerDashView(request):

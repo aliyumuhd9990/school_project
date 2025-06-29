@@ -9,7 +9,7 @@ class Order(models.Model):
     full_name = models.CharField(max_length=50)
     email = models.EmailField()
     city = models.CharField(max_length=50)
-    contact = models.IntegerField()
+    contact = models.CharField(max_length=11, default="080xxxxxxx")
     location = models.CharField(max_length=250, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
