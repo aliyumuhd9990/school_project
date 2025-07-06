@@ -45,7 +45,6 @@ prometheus_client
 prompt_toolkit
 psycopg
 pycparser
-PyGreSQL
 PyJWT
 pyOpenSSL
 python-dateutil==2.9.0.post0
